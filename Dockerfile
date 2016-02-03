@@ -17,8 +17,8 @@ RUN curl -L https://gerrit-releases.storage.googleapis.com/gerrit-${GERRIT_VERSI
 RUN mkdir review_site
 
 # Install plugins
-RUN mkdir review_site/plugins
-RUN curl -L https://gerrit-ci.gerritforge.com/job/plugin-events-log-stable-2.12/lastSuccessfulBuild/artifact/buck-out/gen/plugins/events-log/events-log.jar -o review_site/plugins/events-log.jar
+RUN mkdir plugins
+RUN curl -L https://gerrit-ci.gerritforge.com/job/plugin-events-log-stable-2.12/lastSuccessfulBuild/artifact/buck-out/gen/plugins/events-log/events-log.jar -o plugins/events-log.jar
 
 VOLUME /home/gerrit/review_site
 EXPOSE 8080
