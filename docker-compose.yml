@@ -1,0 +1,6 @@
+gerrit:
+    build: gerrit
+    expose:
+        - "8080"
+    volumes:
+        - ./gerrit-volume:/home/gerrit/review_site
