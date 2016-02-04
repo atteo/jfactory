@@ -3,7 +3,10 @@ gerrit:
     expose:
         - "8080"
     environment:
-        PROXY_HOST: "localhost"
+        "PROXY_URL":
+        "LDAP_URL":
+        "LDAP_ACCOUNT_BASE":
+        "LDAP_GROUP_BASE":
     volumes:
         - ./data/gerrit-volume:/home/gerrit/review_site
 proxy:
