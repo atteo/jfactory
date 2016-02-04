@@ -11,7 +11,7 @@ mv plugins/* review_site/plugins/
 
 cd review_site
 
-gerrit_config gerrit.canonicalWebUrl "http://${PROXY_URL}/gerrit"
+gerrit_config gerrit.canonicalWebUrl "${PROXY_URL}/gerrit"
 gerrit_config httpd.listenUrl "proxy-http://*:8080/gerrit/"
 
 gerrit_config auth.type "LDAP"
