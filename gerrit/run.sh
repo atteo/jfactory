@@ -49,6 +49,10 @@ configure_gc() {
 	gerrit_config gc.interval "7 day"
 }
 
+configure_suggest() {
+	gerrit_config suggest.fullTextSearch "true"
+}
+
 echo "Updating..."
 java -jar gerrit.war init -d review_site --batch --no-auto-start
 
@@ -62,6 +66,7 @@ configure_smtp
 configure_linking
 configure_download_plugin
 configure_gc
+configure_suggest
 
 echo "Reindexing..."
 java -jar bin/gerrit.war 'reindex'
