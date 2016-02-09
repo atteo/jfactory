@@ -20,12 +20,19 @@ gerrit:
         "JIRA_URL":
     volumes:
         - ./data/gerrit-volume:/home/gerrit/review_site
+jenkins:
+    build: jenkins/
+    expose:
+        - "8080"
+    volumes:
+        - ./data/jenkins-volume:/var/jenkins_home
 proxy:
     image: nginx
     ports:
         - "80:80"
     links:
         - gerrit
+        - jenkins
     volumes:
         - ./proxy/nginx.conf:/etc/nginx/conf.d/default.conf:ro
 
