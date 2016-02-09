@@ -21,6 +21,7 @@ RUN mkdir plugins
 RUN curl -L https://gerrit-ci.gerritforge.com/job/plugin-events-log-stable-2.12/lastSuccessfulBuild/artifact/buck-out/gen/plugins/events-log/events-log.jar -o plugins/events-log.jar
 RUN curl -L https://gerrit-ci.gerritforge.com/job/plugin-delete-project-stable-2.12/lastSuccessfulBuild/artifact/buck-out/gen/plugins/delete-project/delete-project.jar -o plugins/delete-project.jar
 RUN curl -L https://gerrit-ci.gerritforge.com/job/plugin-reviewers-stable-2.12/lastSuccessfulBuild/artifact/buck-out/gen/plugins/reviewers/reviewers.jar -o plugins/reviewers.jar
+RUN curl -L https://gerrit-ci.gerritforge.com/job/plugin-branch-network-stable-2.12/lastSuccessfulBuild/artifact/buck-out/gen/plugins/branch-network/branch-network.jar -o plugins/branch-network.jar
 
 VOLUME /home/gerrit/review_site
 EXPOSE 8080
