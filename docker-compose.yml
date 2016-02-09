@@ -3,13 +3,21 @@ gerrit:
     expose:
         - "8080"
     environment:
+        # http
         "PROXY_URL":
+
+        # ldap
         "LDAP_URL":
         "LDAP_ACCOUNT_BASE":
         "LDAP_GROUP_BASE":
+
+        # smtp
         "SMTP_SERVER":
         "SMTP_SERVER_PORT":
         "SMTP_FROM":
+
+        # jira
+        "JIRA_URL":
     volumes:
         - ./data/gerrit-volume:/home/gerrit/review_site
 proxy:

@@ -30,6 +30,15 @@ configure_smtp() {
 	gerrit_config sendemail.from "${SMTP_FROM}"
 }
 
+configure_linking() {
+	if [[ -z "${JIRA_URL}" ]]; then
+		return;
+	fi
+
+	gerrit_config "commentlink.jira.match" "([A-Z]+-[0-9]+)"
+	gerrit_config "commentlink.jira.link" "${JIRA_URL}/browse/\$1"
+}
+
 echo "Updating..."
 java -jar gerrit.war init -d review_site --batch --no-auto-start
 
@@ -40,10 +49,10 @@ cd review_site
 configure_http
 configure_ldap
 configure_smtp
-
-
+configure_linking
 
 echo "Reindexing..."
 java -jar bin/gerrit.war 'reindex'
 
 bin/gerrit.sh run
+
