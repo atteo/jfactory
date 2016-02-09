@@ -7,6 +7,9 @@ gerrit:
         "LDAP_URL":
         "LDAP_ACCOUNT_BASE":
         "LDAP_GROUP_BASE":
+        "SMTP_SERVER":
+        "SMTP_SERVER_PORT":
+        "SMTP_FROM":
     volumes:
         - ./data/gerrit-volume:/home/gerrit/review_site
 proxy:
