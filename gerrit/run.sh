@@ -44,6 +44,11 @@ configure_download_plugin() {
 	gerrit_config download.command "checkout"
 }
 
+configure_gc() {
+	gerrit_config gc.startTime "Fri 2:30"
+	gerrit_config gc.interval "7 day"
+}
+
 echo "Updating..."
 java -jar gerrit.war init -d review_site --batch --no-auto-start
 
@@ -56,6 +61,7 @@ configure_ldap
 configure_smtp
 configure_linking
 configure_download_plugin
+configure_gc
 
 echo "Reindexing..."
 java -jar bin/gerrit.war 'reindex'
