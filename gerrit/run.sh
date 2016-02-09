@@ -35,8 +35,13 @@ configure_linking() {
 		return;
 	fi
 
-	gerrit_config "commentlink.jira.match" "([A-Z]+-[0-9]+)"
-	gerrit_config "commentlink.jira.link" "${JIRA_URL}/browse/\$1"
+	gerrit_config commentlink.jira.match "([A-Z]+-[0-9]+)"
+	gerrit_config commentlink.jira.link "${JIRA_URL}/browse/\$1"
+}
+
+configure_download_plugin() {
+	gerrit_config download.scheme "http"
+	gerrit_config download.command "checkout"
 }
 
 echo "Updating..."
@@ -50,6 +55,7 @@ configure_http
 configure_ldap
 configure_smtp
 configure_linking
+configure_download_plugin
 
 echo "Reindexing..."
 java -jar bin/gerrit.war 'reindex'
