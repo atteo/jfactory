@@ -26,6 +26,7 @@ jenkins:
         - "8080"
     volumes:
         - ./data/jenkins-volume:/var/jenkins_home
+        - /var/run/docker.sock:/run/docker.sock
 proxy:
     image: nginx
     ports:
