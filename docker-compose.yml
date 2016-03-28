@@ -1,7 +1,12 @@
 version: '2'
 services:
     gerrit:
-        build: gerrit/
+        build:
+            context: gerrit/
+            args:
+                - http_proxy
+                - https_proxy
+                - no_proxy
         expose:
             - "8080"
         environment:
@@ -23,7 +28,12 @@ services:
         volumes:
             - ./data/gerrit-volume:/home/gerrit/review_site
     nexus:
-        build: nexus/
+        build:
+            context: nexus/
+            args:
+                - http_proxy
+                - https_proxy
+                - no_proxy
         expose:
             - "8081"
         volumes:

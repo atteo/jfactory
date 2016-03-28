@@ -14,6 +14,7 @@ http://download.sonatype.com/nexus/3/nexus-${NEXUS_VERSION}-unix.tar.gz \
   && cp -r /nexus-3.0.0-${NEXUS_FILE}/. ${NEXUS_DIRECTORY} \
   && rm -rf nexus-3.0.0-${NEXUS_FILE}
 
+RUN sed -ire 's,^nexus-context-path=/$,nexus-context-path=/nexus,' "${NEXUS_DIRECTORY}/etc/org.sonatype.nexus.cfg"
 
 VOLUME ${NEXUS_DIRECTORY}/data
 
