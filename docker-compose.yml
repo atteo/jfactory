@@ -29,7 +29,12 @@ services:
         volumes:
              - ./data/nexus-volume:/opt/sonatype/nexus/data
     jenkins:
-        build: jenkins/
+        build:
+            context: jenkins/
+            args:
+                - http_proxy
+                - https_proxy
+                - no_proxy
         expose:
             - "8080"
         volumes:
