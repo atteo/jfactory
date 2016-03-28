@@ -1,5 +1,5 @@
 FROM java:openjdk-8-jre
-MAINTAINER Sławek Piotrowski
+MAINTAINER Sławek Piotrowski <sentinel@atteo.com>
 
 ENV GERRIT_VERSION 2.12
 ENV GERRIT_HOME "/home/gerrit"
