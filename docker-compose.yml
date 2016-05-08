@@ -9,6 +9,7 @@ services:
                 - no_proxy
         expose:
             - "8080"
+            - "29418"
         environment:
             # http
             "PROXY_URL":

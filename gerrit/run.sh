@@ -53,6 +53,12 @@ configure_suggest() {
 	gerrit_config suggest.fullTextSearch "true"
 }
 
+configure_batchuser() {
+	gerrit_config plugin.batchuser.username "jenkins"
+	gerrit_config plugin.batchuser.name "Jenkins"
+	gerrit_config plugin.batchuser.sshKey "$(cat jenkins_ssh_key.pub)"
+}
+
 echo "Updating..."
 java -jar gerrit.war init -d review_site --batch --no-auto-start
 
@@ -67,6 +73,7 @@ configure_linking
 configure_download_plugin
 configure_gc
 configure_suggest
+configure_batchuser
 
 echo "Reindexing..."
 java -jar bin/gerrit.war 'reindex'

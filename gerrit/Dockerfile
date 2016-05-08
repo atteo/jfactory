@@ -9,7 +9,6 @@ RUN useradd -m -d "$GERRIT_HOME" -U $GERRIT_USER
 
 RUN apt-get update && apt-get install -y git
 
-
 # Install Gerrit
 WORKDIR $GERRIT_HOME
 USER "$GERRIT_USER"
@@ -26,6 +25,7 @@ RUN unzip -j gerrit.war WEB-INF/plugins/download-commands.jar -d plugins
 VOLUME /home/gerrit/review_site
 EXPOSE 8080
 
+COPY batchuser.jar plugins/
 COPY run.sh ./
 
 CMD ./run.sh
