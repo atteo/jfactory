@@ -39,20 +39,20 @@ services:
             - "8081"
         volumes:
              - ./data/nexus-volume:/opt/sonatype/nexus/data
-    jenkins:
-        build:
-            context: jenkins/
-            args:
-                - http_proxy
-                - https_proxy
-                - no_proxy
-        expose:
-            - "8080"
-        volumes:
-            - ./data/jenkins-volume:/var/jenkins_home
-            - /var/run/docker.sock:/run/docker.sock
-        environment:
-            JAVA_OPTS: "-Djava.awt.headless=true"
+#    jenkins:
+#        build:
+#            context: jenkins/
+#            args:
+#                - http_proxy
+#                - https_proxy
+#                - no_proxy
+#        expose:
+#            - "8080"
+#        volumes:
+#            - ./data/jenkins-volume:/var/jenkins_home
+#            - /var/run/docker.sock:/run/docker.sock
+#        environment:
+#            JAVA_OPTS: "-Djava.awt.headless=true"
     go-server:
         build:
             context: go-server
