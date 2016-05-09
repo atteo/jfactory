@@ -53,17 +53,37 @@ services:
             - /var/run/docker.sock:/run/docker.sock
         environment:
             JAVA_OPTS: "-Djava.awt.headless=true"
-        links:
-            - gerrit
-            - nexus
+    go-server:
+        build:
+            context: go-server
+            args:
+                - http_proxy
+                - https_proxy
+                - no_proxy
+        expose:
+            - "8153"
+        volumes:
+            - ./data/goserver-volume/data:/var/lib/go-server
+            - ./data/goserver-volume/log:/var/log/go-server
+            - ./data/goserver-volume/etc:/etc/go
+            - ./data/goserver-volume/addons:/go-addons
+    go-agent1:
+        build:
+            context: go-agent
+            args:
+                - http_proxy
+                - https_proxy
+                - no_proxy
+    go-agent2:
+        build:
+            context: go-agent
+            args:
+                - http_proxy
+                - https_proxy
+                - no_proxy
     proxy:
         image: nginx
         ports:
             - "80:80"
-        links:
-            - gerrit
-            - jenkins
-            - nexus
         volumes:
             - ./proxy/nginx.conf:/etc/nginx/conf.d/default.conf:ro
-
