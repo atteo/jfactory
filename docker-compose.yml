@@ -67,6 +67,7 @@ services:
             - ./data/goserver-volume/log:/var/log/go-server
             - ./data/goserver-volume/etc:/etc/go
             - ./data/goserver-volume/addons:/go-addons
+            - ./data/goserver-volume/home:/var/go
     go-agent1:
         build:
             context: go-agent
