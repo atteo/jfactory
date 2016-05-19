@@ -1,4 +1,4 @@
-FROM jenkins
+FROM jenkins:2.3
 MAINTAINER Sławek Piotrowski <sentinel@atteo.com>
 
 USER root

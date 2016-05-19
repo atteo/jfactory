@@ -11,7 +11,7 @@ createJenkinsSshKey() {
 
 	echo -n "Jenkins public key: "
 
-	if [[ -r "${GERRIT_DIR}/${JENKINS_KEY_NAME}.pub" ]]; then
+	if [[ -r "${GERRIT_DIR}/${JENKINS_KEY_NAME}.pub" ]] && [[ -r "${JENKINS_DIR}/${JENKINS_KEY_NAME}" ]]; then
 		echo "already exists"
 		return;
 	fi
