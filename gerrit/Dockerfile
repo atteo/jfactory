@@ -15,6 +15,17 @@ USER "$GERRIT_USER"
 RUN curl -L https://gerrit-releases.storage.googleapis.com/gerrit-${GERRIT_VERSION}.war -o gerrit.war
 RUN mkdir review_site
 
+# Install bouncy castle
+ENV BOUNCY_CASTLE_VERSION 154
+ENV BOUNCY_CASTLE_URL https://downloads.bouncycastle.org/java
+
+RUN curl \
+	-L ${BOUNCY_CASTLE_URL}/bcprov-jdk15on-${BOUNCY_CASTLE_VERSION}.jar \
+	-o ${GERRIT_HOME}/bcprov-jdk15on-${BOUNCY_CASTLE_VERSION}.jar
+RUN curl \
+	-L ${BOUNCY_CASTLE_URL}/bcpkix-jdk15on-${BOUNCY_CASTLE_VERSION}.jar \
+	-o ${GERRIT_HOME}/bcpkix-jdk15on-${BOUNCY_CASTLE_VERSION}.jar
+
 # Install plugins
 RUN mkdir plugins
 RUN curl -L https://gerrit-ci.gerritforge.com/job/plugin-events-log-stable-2.12/lastSuccessfulBuild/artifact/buck-out/gen/plugins/events-log/events-log.jar -o plugins/events-log.jar

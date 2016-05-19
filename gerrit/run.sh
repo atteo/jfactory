@@ -66,6 +66,10 @@ mv plugins/* review_site/plugins/
 
 cd review_site
 
+# Install the Bouncy Castle
+cp -f ${GERRIT_HOME}/bcprov-jdk15on-${BOUNCY_CASTLE_VERSION}.jar lib/bcprov-jdk15on-${BOUNCY_CASTLE_VERSION}.jar
+cp -f ${GERRIT_HOME}/bcpkix-jdk15on-${BOUNCY_CASTLE_VERSION}.jar lib/bcpkix-jdk15on-${BOUNCY_CASTLE_VERSION}.jar
+
 configure_http
 configure_ldap
 configure_smtp
