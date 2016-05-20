@@ -82,5 +82,5 @@ configure_batchuser
 echo "Reindexing..."
 java -jar bin/gerrit.war 'reindex'
 
-bin/gerrit.sh run
+exec bin/gerrit.sh run
 
