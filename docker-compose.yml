@@ -50,6 +50,7 @@ services:
             - "8080"
         volumes:
             - ./data/jenkins-volume:/var/jenkins_home
+            # See: https://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/
             - /var/run/docker.sock:/run/docker.sock
         environment:
             JAVA_OPTS: "-Djava.awt.headless=true"
