@@ -48,6 +48,9 @@ services:
                 - no_proxy
         expose:
             - "8080"
+        # for slaves
+        ports:
+            - "50000:50000"
         volumes:
             - ./data/jenkins-volume:/var/jenkins_home
             # See: https://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/
