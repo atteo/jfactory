@@ -39,8 +39,9 @@ configure_linking() {
 	gerrit_config commentlink.jira.link "${JIRA_URL}/browse/\$1"
 }
 
-configure_download_plugin() {
+configure_download_schemes() {
 	gerrit_config download.scheme "http"
+	gerrit_config --add download.scheme "ssh"
 	gerrit_config download.command "checkout"
 }
 
@@ -74,7 +75,7 @@ configure_http
 configure_ldap
 configure_smtp
 configure_linking
-configure_download_plugin
+configure_download_schemes
 configure_gc
 configure_suggest
 configure_batchuser
