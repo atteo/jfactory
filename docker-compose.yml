@@ -10,6 +10,8 @@ services:
         expose:
             - "8080"
             - "29418"
+        ports:
+            - "29418:29418"
         environment:
             # http
             "PROXY_URL":
