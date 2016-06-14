@@ -28,6 +28,8 @@ services:
             "JIRA_URL":
         volumes:
             - ./data/gerrit-volume:/home/gerrit/review_site
+            # timezone
+            - /etc/localtime:/etc/localtime:ro
     nexus:
         build:
             context: nexus/
@@ -38,7 +40,9 @@ services:
         expose:
             - "8081"
         volumes:
-             - ./data/nexus-volume:/opt/sonatype/nexus/data
+            - ./data/nexus-volume:/opt/sonatype/nexus/data
+            # timezone
+            - /etc/localtime:/etc/localtime:ro
     jenkins:
         build:
             context: jenkins/
@@ -55,6 +59,8 @@ services:
             - ./data/jenkins-volume:/var/jenkins_home
             # See: https://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/
             - /var/run/docker.sock:/run/docker.sock
+            # timezone
+            - /etc/localtime:/etc/localtime:ro
         environment:
             JAVA_OPTS: "-Djava.awt.headless=true"
     proxy:
@@ -63,6 +69,8 @@ services:
             - "80:80"
         volumes:
             - ./proxy/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+            # timezone
+            - /etc/localtime:/etc/localtime:ro
 networks:
     default:
         driver: bridge
