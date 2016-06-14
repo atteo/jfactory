@@ -18,8 +18,8 @@ RUN mkdir -p /usr/share/maven \
 ENV MAVEN_HOME /usr/share/maven
 
 # nodejs
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
-RUN apt-get install -y nodejs
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y nodejs && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /home/jenkins
 USER jenkins
