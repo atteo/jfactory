@@ -40,7 +40,7 @@ configure_linking() {
 }
 
 configure_download_schemes() {
-	gerrit_config download.scheme "http"
+	gerrit_config --replace-all download.scheme "http"
 	gerrit_config --add download.scheme "ssh"
 	gerrit_config download.command "checkout"
 }
