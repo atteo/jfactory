@@ -19,4 +19,8 @@ ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
 RUN echo "2.0" > $JENKINS_REF/jenkins.install.UpgradeWizard.state \
 	&& echo "2.0" > $JENKINS_REF/jenkins.install.InstallUtil.lastExecVersion
 
-
+# Some initial configuration
+COPY config.xml /usr/share/jenkins/ref/
+COPY credentials.xml /usr/share/jenkins/ref/
+COPY gerrit-trigger.xml /usr/share/jenkins/ref/
+COPY jobs /usr/share/jenkins/ref/jobs
