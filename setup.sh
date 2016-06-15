@@ -3,16 +3,16 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 JENKINS_DIR="data/jenkins-volume"
 JENKINS_KEY_NAME="jenkins_ssh_key"
-JENKINS_SLAVE_DIR="data/slave"
+JENKINS_SLAVE_DIR="data/slave-volume"
 GERRIT_DIR="data/gerrit-volume"
-
-GOSERVER_DIR="data/goserver-volume/home"
 
 createJenkinsSshKey() {
 
 	echo -n "Jenkins public key: "
 
-	if [[ -r "${GERRIT_DIR}/${JENKINS_KEY_NAME}.pub" ]] && [[ -r "${JENKINS_DIR}/${JENKINS_KEY_NAME}" ]]; then
+	if [[ -r "${GERRIT_DIR}/${JENKINS_KEY_NAME}.pub" ]] \
+		&& [[ -r "${JENKINS_DIR}/${JENKINS_KEY_NAME}" ]] \
+		&& [[ -r "${JENKINS_SLAVE_DIR}/${JENKINS_KEY_NAME}" ]]; then
 		echo "already exists"
 		return;
 	fi
