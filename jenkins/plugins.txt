@@ -45,3 +45,4 @@ workflow-scm-step:2.1
 workflow-step-api:2.1
 workflow-support:2.0
 ssh-agent:1.11
+htmlpublisher:1.11
