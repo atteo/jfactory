@@ -22,5 +22,10 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && rm -rf /var/lib/ap
 RUN apt-get update && apt-get install -y nodejs && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /home/jenkins
+
+COPY ssh_config .ssh/config
+COPY jenkins_ssh_key .ssh/id_rsa
+RUN chown jenkins.jenkins .ssh/config .ssh/id_rsa
+
 USER jenkins
 

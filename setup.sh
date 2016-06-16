@@ -3,7 +3,7 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 JENKINS_DIR="data/jenkins-volume"
 JENKINS_KEY_NAME="jenkins_ssh_key"
-JENKINS_SLAVE_DIR="data/slave-volume"
+JENKINS_SLAVE_DIR="slave"
 GERRIT_DIR="data/gerrit-volume"
 
 createJenkinsSshKey() {
@@ -25,7 +25,13 @@ createJenkinsSshKey() {
 	echo "created"
 }
 
+buildSlave() {
+	cd slave
+	./build.sh
+}
+
 cd "$SCRIPT_DIR"
 
 createJenkinsSshKey
+buildSlave
 
