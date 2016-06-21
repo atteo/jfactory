@@ -1,15 +1,15 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <hudson>
   <disabledAdministrativeMonitors/>
-  <version>2.3</version>
-  <numExecutors>2</numExecutors>
+  <version>2.9</version>
+  <numExecutors>0</numExecutors>
   <mode>NORMAL</mode>
   <useSecurity>true</useSecurity>
   <authorizationStrategy class="hudson.security.AuthorizationStrategy$Unsecured"/>
   <securityRealm class="hudson.security.SecurityRealm$None"/>
   <disableRememberMe>false</disableRememberMe>
   <projectNamingStrategy class="jenkins.model.ProjectNamingStrategy$DefaultProjectNamingStrategy"/>
-  <workspaceDir>${JENKINS_HOME}/workspace/${ITEM_FULLNAME}</workspaceDir>
+  <workspaceDir>${ITEM_ROOTDIR}/workspace</workspaceDir>
   <buildsDir>${ITEM_ROOTDIR}/builds</buildsDir>
   <jdks/>
   <viewsTabBar class="hudson.views.DefaultViewsTabBar"/>
@@ -27,7 +27,7 @@
           </launcher>
           <remoteFsMapping></remoteFsMapping>
           <remoteFs>/home/jenkins</remoteFs>
-          <instanceCap>2</instanceCap>
+          <instanceCap>3</instanceCap>
           <mode>NORMAL</mode>
           <retentionStrategy class="com.nirima.jenkins.plugins.docker.strategy.DockerOnceRetentionStrategy">
             <idleMinutes>10</idleMinutes>
@@ -42,6 +42,10 @@
             <dnsHosts/>
             <volumes>
               <string>/etc/localtime:/etc/localtime:ro</string>
+              <string>/etc/timezone:/etc/timezone:ro</string>
+              <string>/etc/ssl/certs:/etc/ssl/certs:ro</string>
+              <string>/usr/share/ca-certificates/:/usr/share/ca-certificates/:ro</string>
+              <string>/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security:ro</string>
             </volumes>
             <volumesFrom2/>
             <environment/>
@@ -55,7 +59,7 @@
             </extraHosts>
           </dockerTemplateBase>
           <removeVolumes>false</removeVolumes>
-          <pullStrategy>PULL_LATEST</pullStrategy>
+          <pullStrategy>PULL_NEVER</pullStrategy>
         </com.nirima.jenkins.plugins.docker.DockerTemplate>
       </templates>
       <serverUrl>unix:///run/docker.sock</serverUrl>
