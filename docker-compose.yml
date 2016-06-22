@@ -1,4 +1,6 @@
 version: '2'
+volumes:
+    slave-m2-repository:
 services:
     gerrit:
         build:

@@ -53,5 +53,9 @@ RUN apt-get update && apt-get install -y apt-transport-https ca-certificates \
 COPY ssh_config .ssh/config
 RUN chown jenkins.jenkins .ssh/config
 
+RUN mkdir -p .m2/repository && chown -R jenkins.jenkins .m2
+
+VOLUME /home/jenkins/.m2/repository
+
 USER jenkins
 

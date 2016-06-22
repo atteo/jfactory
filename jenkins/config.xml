@@ -46,6 +46,7 @@
               <string>/etc/ssl/certs:/etc/ssl/certs:ro</string>
               <string>/usr/share/ca-certificates/:/usr/share/ca-certificates/:ro</string>
               <string>/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security:ro</string>
+              <string>jfactory_slave-m2-repository:/home/jenkins/.m2/repository</string>
             </volumes>
             <volumesFrom2/>
             <environment/>
