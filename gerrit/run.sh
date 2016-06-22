@@ -60,6 +60,10 @@ configure_batchuser() {
 	gerrit_config plugin.batchuser.sshKey "$(cat jenkins_ssh_key.pub)"
 }
 
+configure_ssh() {
+	gerrit_config sshd.maxConnectionsPerUser "0"
+}
+
 echo "Updating..."
 java -jar gerrit.war init -d review_site --batch --no-auto-start
 
@@ -79,6 +83,7 @@ configure_download_schemes
 configure_gc
 configure_suggest
 configure_batchuser
+configure_ssh
 
 echo "Reindexing..."
 java -jar bin/gerrit.war 'reindex'
