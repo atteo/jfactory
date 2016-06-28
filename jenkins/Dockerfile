@@ -23,4 +23,8 @@ RUN echo "2.0" > $JENKINS_REF/jenkins.install.UpgradeWizard.state \
 COPY config.xml /usr/share/jenkins/ref/
 COPY credentials.xml /usr/share/jenkins/ref/
 COPY gerrit-trigger.xml /usr/share/jenkins/ref/
+COPY jenkins.model.JenkinsLocationConfiguration.xml.override /usr/share/jenkins/ref/
+COPY jenkins_jfactory.sh /usr/local/bin/
 COPY jobs /usr/share/jenkins/ref/jobs
+
+ENTRYPOINT /usr/local/bin/jenkins_jfactory.sh

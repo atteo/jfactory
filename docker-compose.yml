@@ -72,6 +72,8 @@ services:
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
         environment:
+            # http
+            "PROXY_URL":
             JAVA_OPTS: "-Djava.awt.headless=true"
     proxy:
         image: nginx
