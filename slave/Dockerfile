@@ -2,7 +2,7 @@ FROM buildpack-deps:jessie-scm
 MAINTAINER Sławek Piotrowski <sentinel@atteo.com>
 
 # versions
-ENV MAVEN_VERSION 3.3.3
+ENV MAVEN_VERSION 3.3.9
 
 ENV HOME /home/jenkins
 RUN useradd -c "Jenkins user" -d $HOME -m jenkins
