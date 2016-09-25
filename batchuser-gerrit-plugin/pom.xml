@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.atteo.jfactory</groupId>
+    <artifactId>batchuser-gerrit-plugin</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>Batch User Gerrit Plugin</name>
+
+    <properties>
+        <Gerrit-ApiType>plugin</Gerrit-ApiType>
+        <Gerrit-ApiVersion>2.12</Gerrit-ApiVersion>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Gerrit-Module>org.atteo.jfactory.CreateBatchUserModule</Gerrit-Module>
+
+                            <Implementation-Vendor>Atteo</Implementation-Vendor>
+                            <Implementation-URL>http://code.google.com/p/gerrit/</Implementation-URL>
+
+                            <Implementation-Title>Plugin ${project.artifactId}</Implementation-Title>
+                            <Implementation-Version>${project.version}</Implementation-Version>
+
+                            <Gerrit-ReloadMode>restart</Gerrit-ReloadMode>
+
+                            <Gerrit-ApiType>${Gerrit-ApiType}</Gerrit-ApiType>
+                            <Gerrit-ApiVersion>${Gerrit-ApiVersion}</Gerrit-ApiVersion>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.google.gerrit</groupId>
+                <artifactId>gerrit-${Gerrit-ApiType}-api</artifactId>
+                <version>${Gerrit-ApiVersion}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>2.2.4</version>
+                <scope>provided</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.google.gerrit</groupId>
+            <artifactId>gerrit-${Gerrit-ApiType}-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+    <repositories>
+        <repository>
+            <id>gerrit-api-repository</id>
+            <url>https://gerrit-api.commondatastorage.googleapis.com/release/</url>
+        </repository>
+    </repositories>
+</project>

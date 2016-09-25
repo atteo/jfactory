@@ -1,1 +1,9 @@
-data/
+target/
+bin/
+.settings/
+.direct_classpath
+.classpath
+.project
+.config/
+.idea/
+*.iml

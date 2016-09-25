@@ -1,0 +1,9 @@
+cloudbees-folder:5.13
+docker-build-step:1.35
+docker-plugin:0.16.2
+gerrit-trigger:2.22.0
+git:3.0.0
+ssh-agent:1.13
+ssh-slaves:1.11
+token-macro:2.0
+workflow-multibranch:2.9
