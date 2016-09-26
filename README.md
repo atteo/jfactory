@@ -30,8 +30,9 @@ docker-compose up
 Open Gerrit web page
 
 ```
-https://localhost/gerrit
+https://172.179.0.1/gerrit
 ```
+Note: URL might be different, if you modified MAIN_URL in .env file
 
 
 ## In-depth installation description
