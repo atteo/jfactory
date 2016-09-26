@@ -7,43 +7,38 @@ JFactory is a ready to use CI/CD environment created as a series of a Docker con
 * Nexus for keeping binary files
 * Nginx which acts as a proxy to Gerrit, Jenkins and Nexus
 
-## Installation instructions
+## Quick installation instructions
 
-### Downloading starter repository
-First download starter repository. 
+Download starter repository. 
 
 ```
 git clone https://github.com/atteo/jfactory-starter
 ```
-
-This repository contains docker-compose.yml file for [Docker Compose](https://docs.docker.com/compose/),
-the setup script setup.sh and .env file.
-
-### Setting up keys and certificates
-
-To generate default keys and certificates execute:
+Execute:
 ```
 setup.sh
 ```
 
-### Configuration
+Edit '.env' and set at least LDAP_URL and LDAP_ACCOUNT_BASE
 
-Edit '.env' and set the required properties.
-
-### Starting Docker containers
-
-To start all Docker containers:
+Start Docker containers:
 
 ```
 docker-compose up
 ```
 
+Open Gerrit web page
 
-## In-depth description
+```
+https://localhost/gerrit
+```
+
+
+## In-depth installation description
 
 ### HTTP certificates
 
-Gerrit, Jenkins and Nexus are accessible through through the Nginx proxy. Nginx requires valid SSL certificates.
+Gerrit, Jenkins and Nexus are accessible through the Nginx proxy. Nginx requires valid SSL certificates.
 setup.sh script generates self signed certificates. You can use them or you can provide your own key and certificate files
 by overwriting two files: certificates/nginx-server.key and certificates/nginx-server.crt.
 
