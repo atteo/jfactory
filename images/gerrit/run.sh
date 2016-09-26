@@ -6,7 +6,11 @@ gerrit_config() {
 
 configure_http() {
 	gerrit_config gerrit.canonicalWebUrl "${PROXY_URL}/gerrit"
-	gerrit_config httpd.listenUrl "proxy-http://*:8080/gerrit/"
+	if [[ "${PROXY_URL}" == "https"* ]]; then
+		gerrit_config httpd.listenUrl "proxy-https://*:8080/gerrit/"
+	else
+		gerrit_config httpd.listenUrl "proxy-http://*:8080/gerrit/"
+	fi
 }
 
 configure_ldap() {
