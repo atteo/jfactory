@@ -3,6 +3,7 @@
 trap "exit 1" ERR
 
 if [[ -z "${PROXY_URL}" ]]; then
+	echo "PROXY_URL cannot be empty" >&2
 	exit 1
 fi
 
