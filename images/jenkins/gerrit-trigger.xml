@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<com.sonyericsson.hudson.plugins.gerrit.trigger.PluginImpl plugin="gerrit-trigger@2.21.1">
+<com.sonyericsson.hudson.plugins.gerrit.trigger.PluginImpl plugin="gerrit-trigger@2.22.0">
   <servers class="java.util.concurrent.CopyOnWriteArrayList">
     <com.sonyericsson.hudson.plugins.gerrit.trigger.GerritServer>
       <name>Local Gerrit</name>
@@ -11,7 +11,7 @@
         <gerritUserName>jenkins</gerritUserName>
         <gerritEMail></gerritEMail>
         <gerritAuthKeyFile>/var/jenkins_home/jenkins_ssh_key</gerritAuthKeyFile>
-        <gerritAuthKeyFilePassword>svnfq6FNQIaQc5ZQNcrjA+VhT1YGhGWXwSq4rrg5K0be3d1I/AwgPlozP9I2b+sP</gerritAuthKeyFilePassword>
+        <gerritAuthKeyFilePassword>aVeP9nxDxXAyCJ/p7ftHQw==</gerritAuthKeyFilePassword>
         <useRestApi>false</useRestApi>
         <restCodeReview>false</restCodeReview>
         <restVerified>false</restVerified>
