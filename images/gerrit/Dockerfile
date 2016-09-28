@@ -38,6 +38,7 @@ VOLUME /home/gerrit/review_site
 EXPOSE 8080
 
 COPY batchuser.jar plugins/
+COPY project.config ./
 COPY run.sh ./
 
 CMD ./run.sh

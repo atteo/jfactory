@@ -68,6 +68,24 @@ configure_ssh() {
 	gerrit_config sshd.maxConnectionsPerUser "0"
 }
 
+configure_permissions() {
+	mkdir tmp2
+	cd tmp2
+	git init
+	git remote add origin ../git/All-Projects.git/
+	git fetch origin refs/meta/config:refs/remotes/origin/meta/config
+	git checkout meta/config
+	if ! grep -q "Verified" project.config; then
+		cp ../../project.config .
+		git config --global user.email "sentinel@atteo.com"
+		git config --global user.name "Sławek Piotrowski"
+		git commit -am "Add Verified category"
+		git push origin meta/config:meta/config
+	fi
+	cd ..
+	rm -rf tmp2
+}
+
 echo "Updating..."
 java -jar gerrit.war init -d review_site --batch --no-auto-start
 
@@ -91,6 +109,8 @@ configure_ssh
 
 echo "Reindexing..."
 java -jar bin/gerrit.war 'reindex'
+
+configure_permissions
 
 exec bin/gerrit.sh run
 
