@@ -51,11 +51,8 @@ RUN apt-get update && apt-get install -y apt-transport-https ca-certificates \
     && apt-get update && apt-get install -y docker-engine && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Docker compose
-RUN echo "===> adding docker-compose..." && \
-	wget https://github.com/docker/compose/releases/download/1.8.1/docker-compose-Linux-x86_64 && \
-    chmod +x docker-compose-Linux-x86_64 && \
-    cp docker-compose-Linux-x86_64 /usr/local/bin/docker-compose && \
-    rm docker-compose-Linux-x86_64
+RUN wget -O /usr/local/bin/docker-compose https://github.com/docker/compose/releases/download/1.8.1/docker-compose-Linux-x86_64 && \
+    chmod +x /usr/local/bin/docker-compose
 
 COPY ssh_config .ssh/config
 RUN chown jenkins.jenkins .ssh/config
