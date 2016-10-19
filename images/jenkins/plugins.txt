@@ -8,3 +8,4 @@ ssh-slaves:1.11
 token-macro:2.0
 workflow-multibranch:2.9
 pipeline-model-definition:0.2
+timestamper:1.8.7
