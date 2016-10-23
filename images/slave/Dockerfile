@@ -48,7 +48,7 @@ WORKDIR /home/jenkins
 RUN apt-get update && apt-get install -y apt-transport-https ca-certificates \
     && apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D \
     && echo "deb https://apt.dockerproject.org/repo debian-jessie main" > /etc/apt/sources.list.d/docker.list \
-    && apt-get update && apt-get install -y docker-engine && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    && apt-get update && apt-get install -y docker-engine && usermod -aG docker jenkins && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Docker compose
 RUN wget -O /usr/local/bin/docker-compose https://github.com/docker/compose/releases/download/1.8.1/docker-compose-Linux-x86_64 && \
@@ -59,6 +59,11 @@ RUN chown jenkins.jenkins .ssh/config
 
 RUN mkdir -p .m2/repository && chown -R jenkins.jenkins .m2
 
-VOLUME /home/jenkins/.m2/repository
+ENV MVN_COMPILE_GOALS="clean install" \
+    PATH=$PATH:/home/jenkins/bin
+
+COPY mvn-incremental /home/jenkins/bin/
+RUN  chmod -R +x /home/jenkins/bin \
+     && chown -R jenkins.jenkins /home/jenkins/bin
 
 USER jenkins
