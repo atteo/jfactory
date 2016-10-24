@@ -1,5 +1,6 @@
 package org.atteo.jfactory;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -9,12 +10,13 @@ import javax.inject.Inject;
 import com.google.common.collect.Sets;
 import com.google.gerrit.common.TimeUtil;
 import com.google.gerrit.common.data.GroupDescriptions;
-import com.google.gerrit.extensions.common.AccountInfo;
 import com.google.gerrit.reviewdb.client.*;
 import com.google.gerrit.server.account.AccountByEmailCache;
 import com.google.gerrit.server.account.AccountCache;
 import com.google.gerrit.server.account.AccountLoader;
+import com.google.gerrit.server.account.VersionedAuthorizedKeys;
 import com.google.gerrit.server.group.GroupsCollection;
+import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,12 +24,8 @@ import com.google.common.collect.Lists;
 import com.google.gerrit.common.errors.InvalidSshKeyException;
 import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.extensions.events.NewProjectCreatedListener;
-import com.google.gerrit.extensions.restapi.BadRequestException;
-import com.google.gerrit.extensions.restapi.ResourceConflictException;
-import com.google.gerrit.extensions.restapi.TopLevelResource;
 import com.google.gerrit.extensions.restapi.UnprocessableEntityException;
 import com.google.gerrit.reviewdb.server.ReviewDb;
-import com.google.gerrit.server.account.CreateAccount;
 import com.google.gerrit.server.config.PluginConfig;
 import com.google.gerrit.server.config.PluginConfigFactory;
 import com.google.gerrit.server.ssh.SshKeyCache;
@@ -39,6 +37,7 @@ public class CreateBatchUser implements NewProjectCreatedListener {
 	private final SchemaFactory<ReviewDb> schema;
 	private final PluginConfig pluginConfig;
 	private final SshKeyCache sshKeyCache;
+    private final VersionedAuthorizedKeys.Accessor authorizedKeys;
 	private final AccountCache accountCache;
 	private final AccountByEmailCache byEmailCache;
 	private final AccountLoader.Factory infoLoader;
@@ -49,10 +48,12 @@ public class CreateBatchUser implements NewProjectCreatedListener {
 
 	@Inject
 	public CreateBatchUser(@PluginName String pluginName, SchemaFactory<ReviewDb> schema,
-			PluginConfigFactory configFactory, SshKeyCache sshKeyCache, AccountCache accountCache,
-            AccountByEmailCache byEmailCache, AccountLoader.Factory infoLoader, GroupsCollection groupsCollection) {
+			PluginConfigFactory configFactory, SshKeyCache sshKeyCache, VersionedAuthorizedKeys.Accessor authorizedKeys,
+        	AccountCache accountCache, AccountByEmailCache byEmailCache, AccountLoader.Factory infoLoader,
+			GroupsCollection groupsCollection) {
 		this.schema = schema;
 		this.sshKeyCache = sshKeyCache;
+        this.authorizedKeys = authorizedKeys;
 		this.accountCache = accountCache;
 		this.byEmailCache = byEmailCache;
 		this.infoLoader = infoLoader;
@@ -81,38 +82,29 @@ public class CreateBatchUser implements NewProjectCreatedListener {
 			AccountExternalId accountExternalId = db.accountExternalIds().get(accountKey);
 
 			if (accountExternalId == null) {
-				createBatchUser(db);
-			} else {
-				updateSshKey(accountExternalId.getAccountId(), db);
+				accountExternalId = createBatchUser(db);
+				logger.info("Batch user account created");
 			}
 
-		} catch (OrmException e) {
+			authorizedKeys.addKey(accountExternalId.getAccountId(), sshKey);
+			sshKeyCache.evict(username);
+		} catch (OrmException|IOException|ConfigInvalidException|InvalidSshKeyException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	public void updateSshKey(Account.Id accountId, final ReviewDb db) throws OrmException {
-		logger.info("Updating SSH key");
-		db.accountSshKeys().delete(db.accountSshKeys().byAccount(accountId));
-		AccountSshKey accountSshKey = createSshKey(accountId, sshKey);
-		db.accountSshKeys().insert(Collections.singleton(accountSshKey));
-	}
-
-	private void createBatchUser(ReviewDb db) {
+	private AccountExternalId createBatchUser(ReviewDb db) {
 		logger.info("Creating new batch user");
 
 		try {
-			createNewUser(db);
+			return createNewUser(db);
 		} catch (OrmException | UnprocessableEntityException e) {
 			throw new RuntimeException(e);
 		}
-
-		logger.info("Batch user account created");
 	}
 
-	private void createNewUser(ReviewDb db) throws OrmException, UnprocessableEntityException {
+	private AccountExternalId createNewUser(ReviewDb db) throws OrmException, UnprocessableEntityException {
 		Account.Id id = new Account.Id(db.nextAccountId());
-		AccountSshKey sshKey = createSshKey(id, this.sshKey);
 		AccountExternalId extUser =
 				new AccountExternalId(id, new AccountExternalId.Key(
 						AccountExternalId.SCHEME_USERNAME, username));
@@ -128,10 +120,6 @@ public class CreateBatchUser implements NewProjectCreatedListener {
 		//a.setPreferredEmail(input.email);
 		db.accounts().insert(Collections.singleton(a));
 
-		if (sshKey != null) {
-			db.accountSshKeys().insert(Collections.singleton(sshKey));
-		}
-
 		Set<AccountGroup.Id> groups = parseGroups(Lists.newArrayList("2"));
 
 		for (AccountGroup.Id groupId : groups) {
@@ -140,26 +128,9 @@ public class CreateBatchUser implements NewProjectCreatedListener {
 			db.accountGroupMembers().insert(Collections.singleton(m));
 		}
 
-		sshKeyCache.evict(username);
 		accountCache.evictByUsername(username);
-		//byEmailCache.evict(email);
 
-		/*
-		AccountLoader loader = infoLoader.create(true);
-		AccountInfo info = loader.get(id);
-		loader.fill();
-		*/
-	}
-
-	private AccountSshKey createSshKey(Account.Id id, String sshKey) {
-		if (sshKey == null) {
-			return null;
-		}
-		try {
-			return sshKeyCache.create(new AccountSshKey.Id(id, 1), sshKey.trim());
-		} catch (InvalidSshKeyException e) {
-			throw new RuntimeException(e);
-		}
+		return extUser;
 	}
 
 	private Set<AccountGroup.Id> parseGroups(List<String> groups)

@@ -2,7 +2,7 @@
 
 trap "exit 1" ERR
 
-GERRIT_VERSION=2.13
+GERRIT_VERSION=2.13.2
 
 cd target
 
