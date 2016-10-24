@@ -35,7 +35,7 @@
           </retentionStrategy>
           <numExecutors>1</numExecutors>
           <dockerTemplateBase>
-			<image>jfactory/slave</image>
+			<image>jfactory/slave:1.0</image>
             <dockerCommand></dockerCommand>
             <lxcConfString></lxcConfString>
             <hostname></hostname>
