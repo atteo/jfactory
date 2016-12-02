@@ -7,6 +7,11 @@ if [[ -z "${MAIN_URL}" ]]; then
 	exit 1
 fi
 
-sed -i -re "s,MAIN_URL,${MAIN_URL}," /usr/share/jenkins/ref/jenkins.model.JenkinsLocationConfiguration.xml.override
+if [[ -z "${JENKINS_SMTP_FROM}" ]]; then
+	echo "JENKINS_SMTP_FROM cannot by empty" >&2
+	exit 1
+fi
+
+sed -i -re "s,MAIN_URL,${MAIN_URL},;s,JENKINS_SMTP_FROM,${JENKINS_SMTP_FROM}," /usr/share/jenkins/ref/jenkins.model.JenkinsLocationConfiguration.xml.override
 
 exec /usr/local/bin/jenkins.sh "$@"
