@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <hudson>
   <disabledAdministrativeMonitors/>
-  <version>2.9</version>
+  <version>2.34</version>
   <numExecutors>0</numExecutors>
   <mode>NORMAL</mode>
   <useSecurity>true</useSecurity>
@@ -15,60 +15,92 @@
   <viewsTabBar class="hudson.views.DefaultViewsTabBar"/>
   <myViewsTabBar class="hudson.views.DefaultMyViewsTabBar"/>
   <clouds>
-    <com.nirima.jenkins.plugins.docker.DockerCloud plugin="docker-plugin@0.16.0">
+    <com.github.kostyasha.yad.DockerCloud plugin="yet-another-docker-plugin@0.1.0-rc30">
       <name>Local</name>
+      <provisionedImages/>
       <templates>
-        <com.nirima.jenkins.plugins.docker.DockerTemplate>
-          <configVersion>2</configVersion>
-          <labelString></labelString>
-          <launcher class="com.nirima.jenkins.plugins.docker.launcher.DockerComputerJNLPLauncher">
+        <com.github.kostyasha.yad.DockerSlaveTemplate>
+          <id>9fbf8eb4-6f57-42f3-b827-ba2761a7c3ff</id>
+          <labelString>docker</labelString>
+          <launcher class="com.github.kostyasha.yad.launcher.DockerComputerJNLPLauncher">
             <launchTimeout>120</launchTimeout>
-            <user></user>
+            <user>jenkins</user>
+            <jvmOpts></jvmOpts>
+            <slaveOpts></slaveOpts>
+            <jenkinsUrl></jenkinsUrl>
+            <noCertificateCheck>false</noCertificateCheck>
           </launcher>
-          <remoteFsMapping></remoteFsMapping>
           <remoteFs>/home/jenkins</remoteFs>
-          <instanceCap>3</instanceCap>
+          <maxCapacity>4</maxCapacity>
           <mode>NORMAL</mode>
-          <retentionStrategy class="com.nirima.jenkins.plugins.docker.strategy.DockerOnceRetentionStrategy">
+          <retentionStrategy class="com.github.kostyasha.yad.strategy.DockerOnceRetentionStrategy">
             <idleMinutes>10</idleMinutes>
-            <idleMinutes defined-in="com.nirima.jenkins.plugins.docker.strategy.DockerOnceRetentionStrategy">10</idleMinutes>
+            <idleMinutes defined-in="com.github.kostyasha.yad.strategy.DockerOnceRetentionStrategy">10</idleMinutes>
           </retentionStrategy>
           <numExecutors>1</numExecutors>
-          <dockerTemplateBase>
-			<image>jfactory/slave:1.0</image>
-            <dockerCommand></dockerCommand>
-            <lxcConfString></lxcConfString>
-            <hostname></hostname>
-            <dnsHosts/>
-            <volumes>
-              <string>/etc/localtime:/etc/localtime:ro</string>
-              <string>/etc/timezone:/etc/timezone:ro</string>
-              <string>/etc/ssl/certs:/etc/ssl/certs:ro</string>
-              <string>/usr/share/ca-certificates/:/usr/share/ca-certificates/:ro</string>
-              <string>/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security:ro</string>
-              <string>jfactory_slave-m2-repository:/home/jenkins/.m2/repository</string>
-            </volumes>
-            <volumesFrom2/>
-            <environment/>
-            <bindPorts></bindPorts>
-            <bindAllPorts>false</bindAllPorts>
-            <privileged>false</privileged>
-            <tty>false</tty>
-            <extraHosts class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
-              <c class="list"/>
-              <list reference="../c"/>
-            </extraHosts>
-          </dockerTemplateBase>
-          <removeVolumes>false</removeVolumes>
-          <pullStrategy>PULL_NEVER</pullStrategy>
-        </com.nirima.jenkins.plugins.docker.DockerTemplate>
+          <dockerContainerLifecycle>
+            <image>jfactory_slave</image>
+            <pullImage>
+              <pullStrategy>PULL_NEVER</pullStrategy>
+              <credentialsId></credentialsId>
+            </pullImage>
+            <createContainer>
+              <command></command>
+              <hostname></hostname>
+              <dnsHosts class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </dnsHosts>
+              <volumes class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </volumes>
+              <volumesFrom class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </volumesFrom>
+              <environment class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </environment>
+              <bindPorts></bindPorts>
+              <bindAllPorts>false</bindAllPorts>
+              <memoryLimit>0</memoryLimit>
+              <privileged>false</privileged>
+              <tty>false</tty>
+              <extraHosts class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </extraHosts>
+              <devices class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </devices>
+              <cpusetCpus></cpusetCpus>
+              <cpusetMems></cpusetMems>
+              <links class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </links>
+            </createContainer>
+            <stopContainer>
+              <timeout>10</timeout>
+            </stopContainer>
+            <removeContainer>
+              <removeVolumes>false</removeVolumes>
+              <force>false</force>
+            </removeContainer>
+          </dockerContainerLifecycle>
+          <nodeProperties/>
+        </com.github.kostyasha.yad.DockerSlaveTemplate>
       </templates>
-      <serverUrl>unix:///run/docker.sock</serverUrl>
-      <connectTimeout>0</connectTimeout>
-      <readTimeout>0</readTimeout>
-      <credentialsId></credentialsId>
-      <containerCap>100</containerCap>
-    </com.nirima.jenkins.plugins.docker.DockerCloud>
+      <containerCap>10</containerCap>
+      <connector>
+        <serverUrl>unix:////run/docker.sock</serverUrl>
+        <credentialsId></credentialsId>
+        <connectorType>JERSEY</connectorType>
+      </connector>
+    </com.github.kostyasha.yad.DockerCloud>
   </clouds>
   <quietPeriod>5</quietPeriod>
   <scmCheckoutRetryCount>0</scmCheckoutRetryCount>
