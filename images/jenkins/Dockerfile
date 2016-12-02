@@ -1,4 +1,4 @@
-FROM jenkinsci/jenkins:2.23
+FROM jenkinsci/jenkins:2.34
 MAINTAINER Sławek Piotrowski <sentinel@atteo.com>
 
 USER root
