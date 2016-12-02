@@ -17,8 +17,8 @@ RUN apt-get update && apt-get install -y apt-transport-https ca-certificates \
 ENV JENKINS_OPTS --prefix=/jenkins
 ENV JENKINS_REF /usr/share/jenkins/ref/
 
-# Skip setup wizard
-ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
+# Skip setup wizard and add workaround for Docker plugin
+ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false -Djenkins.slaves.DefaultJnlpSlaveReceiver.disableStrictVerification=true -Djava.awt.headless=true
 RUN echo "2.0" > $JENKINS_REF/jenkins.install.UpgradeWizard.state \
 	&& echo "2.0" > $JENKINS_REF/jenkins.install.InstallUtil.lastExecVersion
 
