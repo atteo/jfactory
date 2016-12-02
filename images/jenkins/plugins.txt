@@ -11,8 +11,11 @@ figlet-buildstep:0.2
 # Automatic folders based on branch detection
 cloudbees-folder:5.13
 
+# Docker plugins
 docker-build-step:1.35
 docker-plugin:0.16.2
+yet-another-docker-plugin:0.1.0-rc29
+
 gerrit-trigger:2.23.0
 git:3.0.1
 ssh-agent:1.13
