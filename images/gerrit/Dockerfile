@@ -29,7 +29,6 @@ RUN curl \
 
 # Install plugins
 RUN mkdir plugins \
-	&& curl -L https://gerrit-ci.gerritforge.com/job/plugin-events-log-stable-${PLUGIN_VERSION}/lastSuccessfulBuild/artifact/buck-out/gen/plugins/events-log/events-log.jar -o plugins/events-log.jar \
 	&& curl -L https://gerrit-ci.gerritforge.com/job/plugin-delete-project-stable-${PLUGIN_VERSION}/lastSuccessfulBuild/artifact/buck-out/gen/plugins/delete-project/delete-project.jar -o plugins/delete-project.jar \
 	&& curl -L https://gerrit-ci.gerritforge.com/job/plugin-reviewers-stable-${PLUGIN_VERSION}/lastSuccessfulBuild/artifact/buck-out/gen/plugins/reviewers/reviewers.jar -o plugins/reviewers.jar \
 	&& unzip -j gerrit.war WEB-INF/plugins/download-commands.jar -d plugins
