@@ -51,8 +51,8 @@ RUN apt-get update && apt-get install -y apt-transport-https ca-certificates \
     && apt-get update && apt-get install -y docker-engine && usermod -aG docker jenkins && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Docker compose
-RUN wget -O /usr/local/bin/docker-compose https://github.com/docker/compose/releases/download/1.8.1/docker-compose-Linux-x86_64 && \
-    chmod +x /usr/local/bin/docker-compose
+RUN curl -L https://github.com/docker/compose/releases/download/1.9.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose && \
+	chmod +x /usr/local/bin/docker-compose
 
 COPY ssh_config .ssh/config
 RUN chown jenkins.jenkins .ssh/config
