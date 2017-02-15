@@ -12,6 +12,9 @@ figlet-buildstep:0.2
 # Automatic folders based on branch detection
 cloudbees-folder:5.13
 
+# Locking support
+lockable-resources
+
 # Docker plugins
 docker-build-step:1.35
 docker-plugin:0.16.2
