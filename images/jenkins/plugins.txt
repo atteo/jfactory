@@ -1,7 +1,7 @@
 # Main plugin aggregating other Pipeline plugins
 workflow-aggregator:2.5
-workflow-multibranch:2.12
-workflow-cps-global-lib:2.6
+workflow-multibranch:2.15
+workflow-cps-global-lib:2.8
 
 # Plugin for timestamps in the Jenkins logs
 timestamper:1.8.8
@@ -10,20 +10,20 @@ timestamper:1.8.8
 figlet-buildstep:0.2
 
 # Automatic folders based on branch detection
-cloudbees-folder:5.17
+cloudbees-folder:6.0.4
 
 # Locking support
-lockable-resources:1.11
+lockable-resources:2.0
 
 # Docker plugins
-docker-build-step:1.39
+docker-build-step:1.43
 docker-plugin:0.16.2
-yet-another-docker-plugin:0.1.0-rc31
+yet-another-docker-plugin:0.1.0-rc37
 
-gerrit-trigger:2.23.0
-git:3.0.5
-ssh-agent:1.14
-ssh-slaves:1.13
-token-macro:2.0
-pipeline-model-definition:1.0.1
-credentials-binding:1.10
+gerrit-trigger:2.23.3
+git:3.3.0
+ssh-agent:1.15
+ssh-slaves:1.20
+token-macro:2.1
+pipeline-model-definition:1.1.6
+credentials-binding:1.12
