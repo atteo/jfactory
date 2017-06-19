@@ -20,19 +20,20 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         System.out.println("Downloading: " + JENKINS_UPDATE_CENTER_URL);
-        List<Plugin> plugins = getPlugins();
-        generateOutputFile(plugins);
+        List<Object> entries = getEntries();
+        generateOutputFile(entries);
         System.out.println("Plugins updated");
     }
 
-    private static List<Plugin> getPlugins() throws IOException {
-        List<Plugin> plugins = new ArrayList<>();
+    private static List<Object> getEntries() throws IOException {
+        List<Object> entries = new ArrayList<>();
         DocumentContext json = downloadUpdateCenterJson();
         try (Stream<String> stream = Files.lines(Paths.get(PLUGINS_VERSION_FILE))) {
             stream.forEach(line -> {
                 String[] splitted = line.split(":");
 
                 if (splitted.length != 2) {
+					entries.add(line);
                     return;
                 }
 
@@ -42,10 +43,10 @@ public class Main {
                 String path = "$.plugins." + pluginName + ".version";
                 String pluginVersion = json.read(path, String.class);
 
-                plugins.add(new Plugin(pluginName, pluginVersion));
+                entries.add(new Plugin(pluginName, pluginVersion));
             });
         }
-        return plugins;
+        return entries;
     }
 
     private static DocumentContext downloadUpdateCenterJson() throws IOException {
@@ -53,16 +54,22 @@ public class Main {
         return JsonPath.parse(out);
     }
 
-    private static void generateOutputFile(List<Plugin> plugins) throws IOException {
+    private static void generateOutputFile(List<Object> entries) throws IOException {
         Path path = Paths.get(PLUGINS_VERSION_FILE);
-        try (BufferedWriter writer = Files.newBufferedWriter(path)) {
-            plugins.forEach(plugin -> {
-                try {
-                    writer.write(plugin.getName() + ":" + plugin.getVersion() + "\n");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-        }
-    }
+		try (BufferedWriter writer = Files.newBufferedWriter(path)) {
+			entries.forEach(entry -> {
+				try {
+					if (entry instanceof Plugin) {
+						Plugin plugin = (Plugin) entry;
+						writer.write(plugin.getName() + ":" + plugin.getVersion() + "\n");
+					} else {
+						writer.write(entry.toString());
+						writer.write("\n");
+					}
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+				}
+			});
+		}
+	}
 }
