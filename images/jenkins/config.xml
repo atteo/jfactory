@@ -39,9 +39,9 @@
           </retentionStrategy>
           <numExecutors>1</numExecutors>
           <dockerContainerLifecycle>
-            <image>jfactory_slave</image>
+            <image>jfactory/slave:2.0</image>
             <pullImage>
-              <pullStrategy>PULL_NEVER</pullStrategy>
+              <pullStrategy>PULL_LATEST</pullStrategy>
               <credentialsId></credentialsId>
             </pullImage>
             <createContainer>
