@@ -94,6 +94,7 @@ echo "Updating..."
 java -jar gerrit.war init -d review_site --batch --no-auto-start
 
 mv plugins/* review_site/plugins/
+cp -r initial_repositories/* review_site/git/
 
 cd review_site
 

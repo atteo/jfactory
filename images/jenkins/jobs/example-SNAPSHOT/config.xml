@@ -31,7 +31,7 @@
       <jenkins.branch.BranchSource>
         <source class="jenkins.plugins.git.GitSCMSource" plugin="git@2.4.4">
           <id>e349cb25-5ed6-4ce8-83a6-146cc700b74d</id>
-          <remote>ssh://gerrit:29418/test</remote>
+          <remote>ssh://gerrit:29418/example</remote>
           <credentialsId>8a9b72e6-469b-4aa7-8d73-53c9ccfd436c</credentialsId>
           <includes>*</includes>
           <excludes></excludes>
