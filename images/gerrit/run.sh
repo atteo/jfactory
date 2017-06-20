@@ -13,6 +13,10 @@ configure_http() {
 	fi
 }
 
+configure_auth() {
+	gerrit_config auth.gitBasicAuthPolicy "${GIT_BASIC_AUTH_POLICY}"
+}
+
 configure_ldap() {
 	gerrit_config auth.type "LDAP"
 	gerrit_config ldap.server "${LDAP_URL}"
@@ -98,6 +102,7 @@ cp -f ${GERRIT_HOME}/bcprov-jdk15on-${BOUNCY_CASTLE_VERSION}.jar lib/bcprov-jdk1
 cp -f ${GERRIT_HOME}/bcpkix-jdk15on-${BOUNCY_CASTLE_VERSION}.jar lib/bcpkix-jdk15on-${BOUNCY_CASTLE_VERSION}.jar
 
 configure_http
+configure_auth
 configure_ldap
 configure_smtp
 configure_linking
