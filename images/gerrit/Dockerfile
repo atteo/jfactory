@@ -16,17 +16,6 @@ USER "$GERRIT_USER"
 RUN curl -f -L https://gerrit-releases.storage.googleapis.com/gerrit-${GERRIT_VERSION}.war -o gerrit.war
 RUN mkdir review_site
 
-# Install bouncy castle
-ENV BOUNCY_CASTLE_VERSION 154
-ENV BOUNCY_CASTLE_URL https://downloads.bouncycastle.org/java
-
-RUN curl -f \
-	-L ${BOUNCY_CASTLE_URL}/bcprov-jdk15on-${BOUNCY_CASTLE_VERSION}.jar \
-	-o ${GERRIT_HOME}/bcprov-jdk15on-${BOUNCY_CASTLE_VERSION}.jar \
-	&& curl -f \
-	-L ${BOUNCY_CASTLE_URL}/bcpkix-jdk15on-${BOUNCY_CASTLE_VERSION}.jar \
-	-o ${GERRIT_HOME}/bcpkix-jdk15on-${BOUNCY_CASTLE_VERSION}.jar
-
 # Install plugins
 RUN mkdir plugins \
 	&& curl -f -L https://gerrit-ci.gerritforge.com/job/plugin-delete-project-bazel-stable-${PLUGIN_VERSION}/lastSuccessfulBuild/artifact/bazel-genfiles/plugins/delete-project/delete-project.jar -o plugins/delete-project.jar \
