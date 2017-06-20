@@ -8,5 +8,8 @@ cd "$( dirname "${BASH_SOURCE[0]}" )"
 gerrit/build.sh
 jenkins/build.sh
 proxy/build.sh
-slave/build.sh
+common-slave/build.sh
+docker-slave/build.sh
+java8-slave/build.sh
+javascript-slave/build.sh
 
