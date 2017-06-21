@@ -90,6 +90,10 @@ configure_permissions() {
 	rm -rf tmp2
 }
 
+configure_gitweb() {
+	gerrit_config gitweb.type "${GITWEB_TYPE}"
+}
+
 echo "Updating..."
 java -jar gerrit.war init -d review_site --batch --no-auto-start
 
@@ -112,6 +116,7 @@ configure_gc
 configure_suggest
 configure_batchuser
 configure_ssh
+configure_gitweb
 
 echo "Reindexing..."
 java -jar bin/gerrit.war 'reindex'
