@@ -102,10 +102,6 @@ cp -r initial_repositories/* review_site/git/
 
 cd review_site
 
-# Install the Bouncy Castle
-cp -f ${GERRIT_HOME}/bcprov-jdk15on-${BOUNCY_CASTLE_VERSION}.jar lib/bcprov-jdk15on-${BOUNCY_CASTLE_VERSION}.jar
-cp -f ${GERRIT_HOME}/bcpkix-jdk15on-${BOUNCY_CASTLE_VERSION}.jar lib/bcpkix-jdk15on-${BOUNCY_CASTLE_VERSION}.jar
-
 configure_http
 configure_auth
 configure_ldap
