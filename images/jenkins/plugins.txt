@@ -1,6 +1,6 @@
 # Main plugin aggregating other Pipeline plugins
 workflow-aggregator:2.5
-workflow-multibranch:2.15
+workflow-multibranch:2.16
 workflow-cps-global-lib:2.8
 
 # Plugin for timestamps in the Jenkins logs
