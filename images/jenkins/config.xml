@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <hudson>
   <disabledAdministrativeMonitors/>
-  <version>2.65</version>
+  <version>2.66</version>
   <numExecutors>0</numExecutors>
   <mode>NORMAL</mode>
   <useSecurity>true</useSecurity>
@@ -128,7 +128,9 @@
                 <list reference="../c"/>
               </dnsHosts>
               <volumes class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
-                <c class="list"/>
+                <c class="list">
+                  <string>slave-m2-repository:/home/jenkins/.m2/repository</string>
+                </c>
                 <list reference="../c"/>
               </volumes>
               <volumesFrom class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
