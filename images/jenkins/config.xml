@@ -246,7 +246,81 @@
             </removeContainer>
           </dockerContainerLifecycle>
           <nodeProperties/>
-          <maxCapacity>10</maxCapacity>
+          <maxCapacity>4</maxCapacity>
+        </com.github.kostyasha.yad.DockerSlaveTemplate>
+        <com.github.kostyasha.yad.DockerSlaveTemplate>
+          <id>99556a2e-a915-438f-9d58-d1ea5d865507</id>
+          <labelString>cloud</labelString>
+          <launcher class="com.github.kostyasha.yad.launcher.DockerComputerJNLPLauncher">
+            <launchTimeout>120</launchTimeout>
+            <user>jenkins</user>
+            <jvmOpts></jvmOpts>
+            <slaveOpts></slaveOpts>
+            <jenkinsUrl></jenkinsUrl>
+            <noCertificateCheck>false</noCertificateCheck>
+          </launcher>
+          <remoteFs>/home/jenkins</remoteFs>
+          <mode>EXCLUSIVE</mode>
+          <retentionStrategy class="com.github.kostyasha.yad.strategy.DockerOnceRetentionStrategy">
+            <idleMinutes>10</idleMinutes>
+            <idleMinutes defined-in="com.github.kostyasha.yad.strategy.DockerOnceRetentionStrategy">10</idleMinutes>
+          </retentionStrategy>
+          <numExecutors>1</numExecutors>
+          <dockerContainerLifecycle>
+            <image>jfactory/cloud-slave:2.0</image>
+            <pullImage>
+              <pullStrategy>PULL_LATEST</pullStrategy>
+              <credentialsId></credentialsId>
+            </pullImage>
+            <createContainer>
+              <command></command>
+              <hostname></hostname>
+              <dnsHosts class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </dnsHosts>
+              <volumes class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </volumes>
+              <volumesFrom class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </volumesFrom>
+              <environment class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </environment>
+              <bindPorts></bindPorts>
+              <bindAllPorts>false</bindAllPorts>
+              <memoryLimit>0</memoryLimit>
+              <privileged>false</privileged>
+              <tty>false</tty>
+              <extraHosts class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </extraHosts>
+              <devices class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </devices>
+              <cpusetCpus></cpusetCpus>
+              <cpusetMems></cpusetMems>
+              <links class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </links>
+            </createContainer>
+            <stopContainer>
+              <timeout>10</timeout>
+            </stopContainer>
+            <removeContainer>
+              <removeVolumes>false</removeVolumes>
+              <force>false</force>
+            </removeContainer>
+          </dockerContainerLifecycle>
+          <nodeProperties/>
+          <maxCapacity>4</maxCapacity>
         </com.github.kostyasha.yad.DockerSlaveTemplate>
       </templates>
       <containerCap>10</containerCap>
@@ -274,4 +348,3 @@
   <nodeProperties/>
   <globalNodeProperties/>
 </hudson>
-
