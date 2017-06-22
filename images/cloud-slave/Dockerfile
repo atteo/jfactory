@@ -2,26 +2,34 @@ FROM jfactory/common-slave:2.0
 MAINTAINER Sławek Piotrowski <sentinel@atteo.com>
 
 # versions
-ENV TERRAFORM_VERSION 0.9.8
-ENV TERRAFORM_HOME /usr/share/terraform
+ENV TERRAFORM_VERSION=0.9.8 \
+    TERRAFORM_HOME=/usr/share/terraform \
+    DOCKER_COMPOSE_VERSION=1.14.0
 
 USER root
 
-# azure
+# azure, aws and docker
 RUN \
     echo "===> add azure repo" && \
     echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ wheezy main" | tee /etc/apt/sources.list.d/azure-cli.list && \
     apt-key adv --keyserver packages.microsoft.com --recv-keys 417A0893 && \
+    \
+    \
+    echo "===> add docker repo" && \
+    echo "deb https://apt.dockerproject.org/repo debian-jessie main" > /etc/apt/sources.list.d/docker.list && \
+    apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D && \
+    \
     apt-get update && \
     \
     \
-    echo "===> install azure-cli and awscli" && \
-    apt-get install -y unzip azure-cli awscli && \
+    echo "===> install cloud tools" && \
+    apt-get install -y unzip docker-engine azure-cli awscli && \
+    usermod -aG docker jenkins && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     \
     \
     echo "===> clean" && \
     apt-get clean  && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # terraform
 RUN mkdir -p $TERRAFORM_HOME \
@@ -29,5 +37,13 @@ RUN mkdir -p $TERRAFORM_HOME \
   && unzip bin.zip -d $TERRAFORM_HOME \
   && ln -s $TERRAFORM_HOME/terraform /usr/bin/terraform \
   && rm bin.zip
+
+# Docker compose
+RUN curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose && \
+	chmod +x /usr/local/bin/docker-compose
+
+# Kubernetes
+RUN curl -L https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl && \
+    chmod +x /usr/local/bin/kubectl
 
 USER jenkins
