@@ -1,0 +1,31 @@
+@Library('jfactory-pipeline-lib') _
+
+pipeline {
+	agent none
+	options {
+		timestamps()
+			timeout(time: 1, unit: 'HOURS')
+	}
+	stages {
+		stage('Nexus upload/download') {
+			agent {
+				label 'java8'
+			}
+			steps {
+				echo 'Uploading file to Nexus raw repository'
+				script {
+					def content = "Hello World from build number ${BUILD_NUMBER}"
+					writeFile file: 'input.file', text: content
+					putInNexus 'input.file','/example/test.file'
+					echo 'Downloading file from Nexus raw repository'
+					getFromNexus '/example/test.file', 'output.file'
+					def content2 = readFile 'output.file'
+					if (content != content2) {
+						error("Downloaded content differs from the uploaded one")
+					}
+				}
+			}
+		}
+	}
+}
+

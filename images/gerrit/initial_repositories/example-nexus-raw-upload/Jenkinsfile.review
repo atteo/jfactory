@@ -1,0 +1,18 @@
+pipeline {
+	agent none
+	options {
+		timestamps()
+			timeout(time: 1, unit: 'HOURS')
+	}
+
+	stages {
+		stage('Java8') {
+			agent {
+				label 'java8'
+			}
+			steps {
+			}
+		}
+	}
+}
+
