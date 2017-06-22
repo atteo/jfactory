@@ -26,7 +26,7 @@ COPY initial_repositories ./initial_repositories
 COPY project.config ./
 COPY gerrit.sh ./
 COPY batchuser.jar plugins/
-RUN chown -R $GERRIT_USER.$GERRIT_USER plugins initial_repositories project.config gerrit.sh
+RUN chown -R $GERRIT_USER.$GERRIT_USER plugins initial_repositories project.config gerrit.sh gerrit.war review_site
 
 USER $GERRIT_USER
 VOLUME /home/gerrit/review_site

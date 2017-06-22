@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<org.jenkinsci.plugins.workflow.libs.GlobalLibraries plugin="workflow-cps-global-lib@2.8">
+  <libraries>
+    <org.jenkinsci.plugins.workflow.libs.LibraryConfiguration>
+      <name>jfactory-pipeline-lib</name>
+      <retriever class="org.jenkinsci.plugins.workflow.libs.SCMSourceRetriever">
+        <scm class="jenkins.plugins.git.GitSCMSource" plugin="git@3.3.0">
+          <id>a502833d-92ed-4850-bb09-5fa177f486ad</id>
+          <remote>ssh://gerrit:29418/jfactory-pipeline-lib</remote>
+          <credentialsId>8a9b72e6-469b-4aa7-8d73-53c9ccfd436c</credentialsId>
+          <remoteName>origin</remoteName>
+          <rawRefSpecs>+refs/heads/*:refs/remotes/origin/*</rawRefSpecs>
+          <includes>*</includes>
+          <excludes></excludes>
+          <ignoreOnPushNotifications>false</ignoreOnPushNotifications>
+        </scm>
+      </retriever>
+      <defaultVersion>master</defaultVersion>
+      <implicit>false</implicit>
+      <allowVersionOverride>true</allowVersionOverride>
+    </org.jenkinsci.plugins.workflow.libs.LibraryConfiguration>
+  </libraries>
+</org.jenkinsci.plugins.workflow.libs.GlobalLibraries>

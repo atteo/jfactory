@@ -23,10 +23,7 @@ RUN echo "2.0" > $JENKINS_REF/jenkins.install.UpgradeWizard.state \
 	&& echo "2.0" > $JENKINS_REF/jenkins.install.InstallUtil.lastExecVersion
 
 # Some initial configuration
-COPY config.xml /usr/share/jenkins/ref/
-COPY credentials.xml /usr/share/jenkins/ref/
-COPY gerrit-trigger.xml /usr/share/jenkins/ref/
-COPY jenkins.model.JenkinsLocationConfiguration.xml.override /usr/share/jenkins/ref/
+COPY config.xml org.jenkinsci.plugins.workflow.libs.GlobalLibraries.xml credentials.xml gerrit-trigger.xml jenkins.model.JenkinsLocationConfiguration.xml.override /usr/share/jenkins/ref/
 COPY entrypoint.sh /usr/local/bin/
 COPY jobs /usr/share/jenkins/ref/jobs
 
