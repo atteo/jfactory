@@ -21,7 +21,7 @@
       <templates>
         <com.github.kostyasha.yad.DockerSlaveTemplate>
           <id>9fbf8eb4-6f57-42f3-b827-ba2761a7c3ff</id>
-          <labelString>docker</labelString>
+          <labelString>cloud</labelString>
           <launcher class="com.github.kostyasha.yad.launcher.DockerComputerJNLPLauncher">
             <launchTimeout>120</launchTimeout>
             <user>jenkins</user>
@@ -38,7 +38,7 @@
           </retentionStrategy>
           <numExecutors>1</numExecutors>
           <dockerContainerLifecycle>
-            <image>jfactory/docker-slave:2.0</image>
+            <image>jfactory/cloud-slave:2.0</image>
             <pullImage>
               <pullStrategy>PULL_LATEST</pullStrategy>
               <credentialsId></credentialsId>

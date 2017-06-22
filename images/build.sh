@@ -9,7 +9,7 @@ gerrit/build.sh
 jenkins/build.sh
 proxy/build.sh
 common-slave/build.sh
-docker-slave/build.sh
+cloud-slave/build.sh
 java8-slave/build.sh
 javascript-slave/build.sh
 
