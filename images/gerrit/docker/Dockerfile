@@ -13,24 +13,25 @@ RUN apt-get update && apt-get install -y git gitweb
 # Install Gerrit
 WORKDIR $GERRIT_HOME
 
-COPY batchuser.jar plugins/
-COPY initial_repositories ./initial_repositories
-COPY project.config ./
-COPY run.sh ./
-RUN chown -R $GERRIT_USER.$GERRIT_USER plugins initial_repositories project.config run.sh
-
-USER $GERRIT_USER
 RUN curl -f -L https://gerrit-releases.storage.googleapis.com/gerrit-${GERRIT_VERSION}.war -o gerrit.war
 RUN mkdir review_site
 
 # Install plugins
-RUN curl -f -L https://gerrit-ci.gerritforge.com/job/plugin-delete-project-bazel-stable-${PLUGIN_VERSION}/lastSuccessfulBuild/artifact/bazel-genfiles/plugins/delete-project/delete-project.jar -o plugins/delete-project.jar \
+RUN mkdir -p plugins \
+	&& curl -f -L https://gerrit-ci.gerritforge.com/job/plugin-delete-project-bazel-stable-${PLUGIN_VERSION}/lastSuccessfulBuild/artifact/bazel-genfiles/plugins/delete-project/delete-project.jar -o plugins/delete-project.jar \
 	&& curl -f -L https://gerrit-ci.gerritforge.com/job/plugin-reviewers-bazel-stable-${PLUGIN_VERSION}/lastSuccessfulBuild/artifact/bazel-genfiles/plugins/reviewers/reviewers.jar -o plugins/reviewers.jar \
 	&& unzip -j gerrit.war WEB-INF/plugins/download-commands.jar -d plugins
 
+COPY initial_repositories ./initial_repositories
+COPY project.config ./
+COPY gerrit.sh ./
+COPY batchuser.jar plugins/
+RUN chown -R $GERRIT_USER.$GERRIT_USER plugins initial_repositories project.config gerrit.sh
+
+USER $GERRIT_USER
 VOLUME /home/gerrit/review_site
 EXPOSE 8080
 
-CMD ./run.sh
+CMD ./gerrit.sh
 
 
