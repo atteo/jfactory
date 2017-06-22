@@ -51,7 +51,9 @@
                 <list reference="../c"/>
               </dnsHosts>
               <volumes class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
-                <c class="list"/>
+                <c class="list">
+                  <string>/run/docker.sock:/run/docker.sock</string>
+                </c>
                 <list reference="../c"/>
               </volumes>
               <volumesFrom class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
