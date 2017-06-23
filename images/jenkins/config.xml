@@ -31,7 +31,7 @@
             <noCertificateCheck>false</noCertificateCheck>
           </launcher>
           <remoteFs>/home/jenkins</remoteFs>
-          <mode>NORMAL</mode>
+          <mode>EXCLUSIVE</mode>
           <retentionStrategy class="com.github.kostyasha.yad.strategy.DockerOnceRetentionStrategy">
             <idleMinutes>10</idleMinutes>
             <idleMinutes defined-in="com.github.kostyasha.yad.strategy.DockerOnceRetentionStrategy">10</idleMinutes>
