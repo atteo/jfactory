@@ -25,5 +25,6 @@ git:3.3.0
 ssh-agent:1.15
 ssh-slaves:1.20
 token-macro:2.1
-pipeline-model-definition:1.1.6
+pipeline-model-definition:1.1.7
 credentials-binding:1.12
+ansicolor:0.5.0
