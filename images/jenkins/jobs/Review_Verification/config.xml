@@ -11,7 +11,7 @@
           <gerritProjects>
             <com.sonyericsson.hudson.plugins.gerrit.trigger.hudsontrigger.data.GerritProject>
               <compareType>ANT</compareType>
-              <pattern>*</pattern>
+              <pattern>**</pattern>
               <branches>
                 <com.sonyericsson.hudson.plugins.gerrit.trigger.hudsontrigger.data.Branch>
                   <compareType>ANT</compareType>
