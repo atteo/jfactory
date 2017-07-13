@@ -23,7 +23,7 @@ RUN \
     \
     \
     echo "===> install cloud tools" && \
-    apt-get install -y unzip docker-engine azure-cli awscli jq gettext-base && \
+    apt-get install -y unzip docker-engine azure-cli awscli jq gettext-base netcat-openbsd && \
     usermod -aG docker jenkins && \
     \
     \
