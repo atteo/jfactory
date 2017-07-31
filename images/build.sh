@@ -2,14 +2,16 @@
 
 trap "exit 1" ERR
 
+VERSION="$1"
+
 # go to the script directory
 cd "$( dirname "${BASH_SOURCE[0]}" )"
 
-gerrit/build.sh
-jenkins/build.sh
-proxy/build.sh
-common-slave/build.sh
-cloud-slave/build.sh
-java8-slave/build.sh
-javascript-slave/build.sh
+gerrit/build.sh $VERSION
+jenkins/build.sh $VERSION
+proxy/build.sh $VERSION
+common-slave/build.sh $VERSION
+cloud-slave/build.sh $VERSION
+java8-slave/build.sh $VERSION
+javascript-slave/build.sh $VERSION
 

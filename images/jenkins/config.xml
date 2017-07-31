@@ -38,7 +38,7 @@
           </retentionStrategy>
           <numExecutors>1</numExecutors>
           <dockerContainerLifecycle>
-            <image>jfactory/cloud-slave:2.0</image>
+            <image>jfactory/cloud-slave:2.1</image>
             <pullImage>
               <pullStrategy>PULL_LATEST</pullStrategy>
               <credentialsId></credentialsId>
@@ -115,7 +115,7 @@
           </retentionStrategy>
           <numExecutors>1</numExecutors>
           <dockerContainerLifecycle>
-            <image>jfactory/java8-slave:2.0</image>
+            <image>jfactory/java8-slave:2.1</image>
             <pullImage>
               <pullStrategy>PULL_LATEST</pullStrategy>
               <credentialsId></credentialsId>
@@ -192,7 +192,7 @@
           </retentionStrategy>
           <numExecutors>1</numExecutors>
           <dockerContainerLifecycle>
-            <image>jfactory/javascript-slave:2.0</image>
+            <image>jfactory/javascript-slave:2.1</image>
             <pullImage>
               <pullStrategy>PULL_LATEST</pullStrategy>
               <credentialsId></credentialsId>

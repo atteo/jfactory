@@ -1,6 +1,8 @@
 #!/bin/bash
 trap "exit 1" ERR
 
+VERSION="$1"
+
 # go to the script directory
 cd "$( dirname "${BASH_SOURCE[0]}" )"
 
@@ -40,7 +42,7 @@ for project in */; do
 done
 cd ../..
 
-docker build -t jfactory/gerrit:2.0 --build-arg=http_proxy --build-arg=https_proxy --build-arg=no_proxy  docker/
+docker build -t jfactory/gerrit:$VERSION --build-arg=http_proxy --build-arg=https_proxy --build-arg=no_proxy  docker/
 
 rm docker/batchuser.jar
 rm -rf docker/initial_repositories

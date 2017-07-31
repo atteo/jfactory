@@ -9,7 +9,7 @@ cd batchuser-gerrit-plugin
 mvn clean install
 cd ..
 
-images/build.sh
+images/build.sh 2.1
 
 
 
