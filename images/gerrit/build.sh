@@ -6,6 +6,7 @@ cd "$( dirname "${BASH_SOURCE[0]}" )"
 
 cp ../../batchuser-gerrit-plugin/target/batchuser-gerrit-plugin-1.0.0-SNAPSHOT.jar docker/batchuser.jar
 
+rm -rf docker/initial_repositories
 cp -r initial_repositories docker/
 cd docker/initial_repositories
 for project in */; do
