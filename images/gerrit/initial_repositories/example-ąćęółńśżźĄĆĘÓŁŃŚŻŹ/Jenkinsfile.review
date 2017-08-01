@@ -1,0 +1,39 @@
+pipeline {
+	agent none
+	options {
+		timestamps()
+			timeout(time: 1, unit: 'HOURS')
+	}
+
+	stages {
+		stage('Java8') {
+			agent {
+				label 'java8'
+			}
+			steps {
+				echo 'Checking java version..'
+				sh 'java -version'
+				echo 'Checking Maven version..'
+				sh 'mvn -version'
+			}
+		}
+		stage('Javascript') {
+			agent {
+				label 'javascript'
+			}
+			steps {
+				echo 'Checking npm version..'
+				sh 'npm --version'
+			}
+		}
+	}
+	post {
+		always {
+			echo "Finished"
+		}
+		failure {
+			echo "Finished with error"
+		}
+	}
+}
+

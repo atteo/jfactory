@@ -1,4 +1,4 @@
-FROM jfactory/common-slave:2.0
+FROM jfactory/common-slave:2.1
 MAINTAINER Sławek Piotrowski <sentinel@atteo.com>
 
 USER root

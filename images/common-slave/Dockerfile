@@ -3,6 +3,8 @@ MAINTAINER Sławek Piotrowski <sentinel@atteo.com>
 
 ENV HOME /home/jenkins
 ENV LANG en_US.UTF-8
+ENV _JAVA_OPTIONS -Dfile.encoding=UTF-8
+
 RUN useradd -c "Jenkins user" -d $HOME -m jenkins
 
 # Java 8 from Oracle
