@@ -2,24 +2,26 @@ FROM jfactory/common-slave:2.1
 MAINTAINER Sławek Piotrowski <sentinel@atteo.com>
 
 # versions
-ENV TERRAFORM_VERSION=0.9.8 \
+ENV TERRAFORM_VERSION=0.10.0 \
     TERRAFORM_HOME=/usr/share/terraform \
-    DOCKER_COMPOSE_VERSION=1.14.0
+    DOCKER_COMPOSE_VERSION=1.15.0
 
 USER root
 
 # azure, aws and docker
 RUN \
+	apt-get update && \
+	apt-get install -y gnupg apt-transport-https ca-certificates && \
     echo "===> add azure repo" && \
     echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ wheezy main" | tee /etc/apt/sources.list.d/azure-cli.list && \
     apt-key adv --keyserver packages.microsoft.com --recv-keys 417A0893 && \
     \
     \
     echo "===> add docker repo" && \
-    echo "deb https://apt.dockerproject.org/repo debian-jessie main" > /etc/apt/sources.list.d/docker.list && \
+	echo "deb https://apt.dockerproject.org/repo debian-stretch main" > /etc/apt/sources.list.d/docker.list && \
 	curl -L https://apt.dockerproject.org/gpg | apt-key add - && \
     \
-    apt-get update && \
+    apt-get -y update && \
     \
     \
     echo "===> install cloud tools" && \
@@ -28,7 +30,7 @@ RUN \
     \
     \
     echo "===> clean" && \
-    apt-get clean  && \
+    apt-get -y clean  && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # terraform
