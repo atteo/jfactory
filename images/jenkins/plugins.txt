@@ -10,7 +10,7 @@ timestamper:1.8.8
 figlet-buildstep:0.2
 
 # Automatic folders based on branch detection
-cloudbees-folder:6.0.4
+cloudbees-folder:6.1.2
 
 # Locking support
 lockable-resources:2.0
@@ -20,11 +20,11 @@ docker-build-step:1.43
 docker-plugin:0.16.2
 yet-another-docker-plugin:0.1.0-rc37
 
-gerrit-trigger:2.23.3
-git:3.3.0
+gerrit-trigger:2.24.0
+git:3.5.1
 ssh-agent:1.15
 ssh-slaves:1.20
 token-macro:2.1
-pipeline-model-definition:1.1.7
+pipeline-model-definition:1.1.9
 credentials-binding:1.12
 ansicolor:0.5.0
