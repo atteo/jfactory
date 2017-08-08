@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION="2.1"
+VERSION="${1:-latest}"
 
 docker push jfactory/gerrit:$VERSION
 docker push jfactory/jenkins:$VERSION
