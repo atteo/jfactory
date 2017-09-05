@@ -1,5 +1,7 @@
 # JFactory
 
+http://labs.play-with-docker.com/?stack=https://raw.githubusercontent.com/atteo/jfactory-starter/master/docker-compose.yml
+
 ## Overview
 JFactory is a ready to use CI/CD environment created as a series of a Docker containers. Currently it contains:
 * Gerrit for management of the Git repositories
