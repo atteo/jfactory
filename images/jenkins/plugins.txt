@@ -28,3 +28,4 @@ token-macro:2.1
 pipeline-model-definition:1.1.9
 credentials-binding:1.12
 ansicolor:0.5.0
+email-ext:2.58
