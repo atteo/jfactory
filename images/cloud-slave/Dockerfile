@@ -2,18 +2,19 @@ FROM jfactory/common-slave:latest
 MAINTAINER Sławek Piotrowski <sentinel@atteo.com>
 
 # versions
-ENV TERRAFORM_VERSION=0.10.3 \
+# Latest stable: curl -s https://storage.googleapis.com/kubernetes-release/release/stable.tx
+ENV TERRAFORM_VERSION=0.10.7 \
     TERRAFORM_HOME=/usr/share/terraform \
     DOCKER_COMPOSE_VERSION=1.16.1 \
-	# Latest stable: curl -s https://storage.googleapis.com/kubernetes-release/release/stable.tx
 	KUBERNETES_VERSION=v1.7.5
 
 USER root
 
 # azure, aws and docker
+# also install libssl1.0.0 as a workaround for https://github.com/Azure/azure-cli/issues/3863
 RUN \
 	apt-get update && \
-	apt-get install -y gnupg2 apt-transport-https ca-certificates software-properties-common && \
+	apt-get install -y gnupg2 apt-transport-https ca-certificates software-properties-common xmlstarlet && \
     echo "===> add azure repo" && \
     echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ wheezy main" | tee /etc/apt/sources.list.d/azure-cli.list && \
     apt-key adv --keyserver packages.microsoft.com --recv-keys 417A0893 && \
@@ -27,7 +28,6 @@ RUN \
     \
     \
     echo "===> install cloud tools" && \
-	\ # Install libssl1.0.0 as a workaround for https://github.com/Azure/azure-cli/issues/3863
 	wget http://ftp.de.debian.org/debian/pool/main/o/openssl/libssl1.0.0_1.0.2l-1~bpo8+1_amd64.deb && dpkg -i libssl1.0.0_1.0.2l-1~bpo8+1_amd64.deb && rm -f libssl1.0.0_1.0.2l-1~bpo8+1_amd64.deb && \
     apt-get install -y unzip docker-ce azure-cli awscli jq gettext-base netcat-openbsd && \
     usermod -aG docker jenkins && \
