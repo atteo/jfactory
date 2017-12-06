@@ -14,7 +14,7 @@ USER root
 # also install libssl1.0.0 as a workaround for https://github.com/Azure/azure-cli/issues/3863
 RUN \
 	apt-get update && \
-	apt-get install -y gnupg2 apt-transport-https ca-certificates software-properties-common xmlstarlet && \
+	apt-get install -y gnupg2 apt-transport-https ca-certificates software-properties-common xmlstarlet python3-yaml && \
     echo "===> add azure repo" && \
     echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ wheezy main" | tee /etc/apt/sources.list.d/azure-cli.list && \
     apt-key adv --keyserver packages.microsoft.com --recv-keys 417A0893 && \
