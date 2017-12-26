@@ -1,7 +1,7 @@
 FROM java:openjdk-8-jre
 MAINTAINER Sławek Piotrowski <sentinel@atteo.com>
 
-ENV GERRIT_VERSION 2.14.2
+ENV GERRIT_VERSION 2.14.5.1
 ENV PLUGIN_VERSION 2.14
 ENV GERRIT_HOME "/home/gerrit"
 ENV GERRIT_USER "gerrit"
