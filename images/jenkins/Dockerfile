@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:2.71-alpine
+FROM jenkins/jenkins:2.98-alpine
 MAINTAINER Sławek Piotrowski <sentinel@atteo.com>
 
 USER root
