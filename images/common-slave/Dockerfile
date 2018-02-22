@@ -1,4 +1,4 @@
-FROM openjdk:8u141-jdk
+FROM openjdk:8u151-jdk
 MAINTAINER Sławek Piotrowski <sentinel@atteo.com>
 
 ENV HOME /home/jenkins
