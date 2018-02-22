@@ -2,11 +2,11 @@ FROM jfactory/common-slave:latest
 MAINTAINER Sławek Piotrowski <sentinel@atteo.com>
 
 # versions
-# Latest stable: curl -s https://storage.googleapis.com/kubernetes-release/release/stable.tx
-ENV TERRAFORM_VERSION=0.10.7 \
+# Latest stable: curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt
+ENV TERRAFORM_VERSION=0.11.3 \
     TERRAFORM_HOME=/usr/share/terraform \
-    DOCKER_COMPOSE_VERSION=1.16.1 \
-	KUBERNETES_VERSION=v1.7.5
+    DOCKER_COMPOSE_VERSION=1.19.0 \
+	KUBERNETES_VERSION=v1.9.3
 
 USER root
 

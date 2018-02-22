@@ -59,7 +59,7 @@ Using HTTPS requires valid SSL certificates. By default self-signed certificates
 You can provide your own key and certificate files by overwriting the files in which they are stored:
 certificates/nginx-server.key and certificates/nginx-server.crt.
 
-Users need to have the server certificate imported as a trusted certificate in order for git commands to work without issuing an error. 
+Users need to have the server certificate imported as a trusted certificate in order for git commands to work without issuing an error.
 
 If you receive the following error when cloning the repo
 ```
