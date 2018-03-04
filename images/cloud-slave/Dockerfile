@@ -10,7 +10,7 @@ ENV TERRAFORM_VERSION=0.11.3 \
 
 USER root
 
-# azure, aws and docker
+# azure, aws, google cloud and docker
 # also install libssl1.0.0 as a workaround for https://github.com/Azure/azure-cli/issues/3863
 RUN \
 	apt-get update && \
@@ -24,12 +24,14 @@ RUN \
 	      $(lsb_release -cs) \
 		  stable" \
     && \
+	echo "deb http://packages.cloud.google.com/apt cloud-sdk-$(lsb_release -c -s) main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
+	curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
     apt-get -y update && \
     \
     \
     echo "===> install cloud tools" && \
 	wget http://ftp.de.debian.org/debian/pool/main/o/openssl/libssl1.0.0_1.0.2l-1~bpo8+1_amd64.deb && dpkg -i libssl1.0.0_1.0.2l-1~bpo8+1_amd64.deb && rm -f libssl1.0.0_1.0.2l-1~bpo8+1_amd64.deb && \
-    apt-get install -y unzip docker-ce azure-cli awscli jq gettext-base netcat-openbsd && \
+    apt-get install -y unzip docker-ce azure-cli awscli jq gettext-base netcat-openbsd google-cloud-sdk && \
     usermod -aG docker jenkins && \
     \
     \
