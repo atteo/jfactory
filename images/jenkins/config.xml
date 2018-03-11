@@ -1,7 +1,11 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version='1.1' encoding='UTF-8'?>
 <hudson>
   <disabledAdministrativeMonitors/>
-  <version>2.66</version>
+  <version>2.108</version>
+  <installState class="jenkins.install.InstallState$5">
+    <isSetupComplete>true</isSetupComplete>
+    <name>RESTART</name>
+  </installState>
   <numExecutors>0</numExecutors>
   <mode>NORMAL</mode>
   <useSecurity>true</useSecurity>
@@ -11,11 +15,12 @@
   <projectNamingStrategy class="jenkins.model.ProjectNamingStrategy$DefaultProjectNamingStrategy"/>
   <workspaceDir>${ITEM_ROOTDIR}/workspace</workspaceDir>
   <buildsDir>${ITEM_ROOTDIR}/builds</buildsDir>
+  <markupFormatter class="hudson.markup.EscapedMarkupFormatter"/>
   <jdks/>
   <viewsTabBar class="hudson.views.DefaultViewsTabBar"/>
   <myViewsTabBar class="hudson.views.DefaultMyViewsTabBar"/>
   <clouds>
-    <com.github.kostyasha.yad.DockerCloud plugin="yet-another-docker-plugin@0.1.0-rc37">
+    <com.github.kostyasha.yad.DockerCloud plugin="yet-another-docker-plugin@0.1.0-rc47">
       <name>Local</name>
       <provisionedImages/>
       <templates>
@@ -29,6 +34,7 @@
             <slaveOpts></slaveOpts>
             <jenkinsUrl></jenkinsUrl>
             <noCertificateCheck>false</noCertificateCheck>
+            <reconnect>false</reconnect>
           </launcher>
           <remoteFs>/home/jenkins</remoteFs>
           <mode>EXCLUSIVE</mode>
@@ -38,7 +44,7 @@
           </retentionStrategy>
           <numExecutors>1</numExecutors>
           <dockerContainerLifecycle>
-            <image>jfactory/cloud-slave:2.1</image>
+            <image>jfactory/cloud-slave:latest</image>
             <pullImage>
               <pullStrategy>PULL_LATEST</pullStrategy>
               <credentialsId></credentialsId>
@@ -84,6 +90,13 @@
                 <c class="list"/>
                 <list reference="../c"/>
               </links>
+              <shmSize>0</shmSize>
+              <restartPolicy>
+                <policyName>NO</policyName>
+                <maximumRetryCount>0</maximumRetryCount>
+              </restartPolicy>
+              <workdir></workdir>
+              <user></user>
             </createContainer>
             <stopContainer>
               <timeout>10</timeout>
@@ -93,7 +106,17 @@
               <force>false</force>
             </removeContainer>
           </dockerContainerLifecycle>
-          <nodeProperties/>
+          <nodeProperties>
+            <com.github.kostyasha.yad.DockerNodeProperty>
+              <containerId>DOCKER_CONTAINER_ID</containerId>
+              <containerIdCheck>true</containerIdCheck>
+              <cloudId>JENKINS_CLOUD_ID</cloudId>
+              <cloudIdCheck>true</cloudIdCheck>
+              <dockerHost>DOCKER_HOST</dockerHost>
+              <dockerHostCheck>true</dockerHostCheck>
+            </com.github.kostyasha.yad.DockerNodeProperty>
+          </nodeProperties>
+          <configVersion>1</configVersion>
           <maxCapacity>4</maxCapacity>
         </com.github.kostyasha.yad.DockerSlaveTemplate>
         <com.github.kostyasha.yad.DockerSlaveTemplate>
@@ -106,6 +129,7 @@
             <slaveOpts></slaveOpts>
             <jenkinsUrl></jenkinsUrl>
             <noCertificateCheck>false</noCertificateCheck>
+            <reconnect>false</reconnect>
           </launcher>
           <remoteFs>/home/jenkins</remoteFs>
           <mode>EXCLUSIVE</mode>
@@ -115,7 +139,7 @@
           </retentionStrategy>
           <numExecutors>1</numExecutors>
           <dockerContainerLifecycle>
-            <image>jfactory/java8-slave:2.1</image>
+            <image>jfactory/java8-slave:latest</image>
             <pullImage>
               <pullStrategy>PULL_LATEST</pullStrategy>
               <credentialsId></credentialsId>
@@ -161,6 +185,13 @@
                 <c class="list"/>
                 <list reference="../c"/>
               </links>
+              <shmSize>0</shmSize>
+              <restartPolicy>
+                <policyName>NO</policyName>
+                <maximumRetryCount>0</maximumRetryCount>
+              </restartPolicy>
+              <workdir></workdir>
+              <user></user>
             </createContainer>
             <stopContainer>
               <timeout>10</timeout>
@@ -170,7 +201,17 @@
               <force>false</force>
             </removeContainer>
           </dockerContainerLifecycle>
-          <nodeProperties/>
+          <nodeProperties>
+            <com.github.kostyasha.yad.DockerNodeProperty>
+              <containerId>DOCKER_CONTAINER_ID</containerId>
+              <containerIdCheck>true</containerIdCheck>
+              <cloudId>JENKINS_CLOUD_ID</cloudId>
+              <cloudIdCheck>true</cloudIdCheck>
+              <dockerHost>DOCKER_HOST</dockerHost>
+              <dockerHostCheck>true</dockerHostCheck>
+            </com.github.kostyasha.yad.DockerNodeProperty>
+          </nodeProperties>
+          <configVersion>1</configVersion>
           <maxCapacity>4</maxCapacity>
         </com.github.kostyasha.yad.DockerSlaveTemplate>
         <com.github.kostyasha.yad.DockerSlaveTemplate>
@@ -183,6 +224,7 @@
             <slaveOpts></slaveOpts>
             <jenkinsUrl></jenkinsUrl>
             <noCertificateCheck>false</noCertificateCheck>
+            <reconnect>false</reconnect>
           </launcher>
           <remoteFs>/home/jenkins</remoteFs>
           <mode>EXCLUSIVE</mode>
@@ -192,7 +234,7 @@
           </retentionStrategy>
           <numExecutors>1</numExecutors>
           <dockerContainerLifecycle>
-            <image>jfactory/javascript-slave:2.1</image>
+            <image>jfactory/javascript-slave:latest</image>
             <pullImage>
               <pullStrategy>PULL_LATEST</pullStrategy>
               <credentialsId></credentialsId>
@@ -236,6 +278,13 @@
                 <c class="list"/>
                 <list reference="../c"/>
               </links>
+              <shmSize>0</shmSize>
+              <restartPolicy>
+                <policyName>NO</policyName>
+                <maximumRetryCount>0</maximumRetryCount>
+              </restartPolicy>
+              <workdir></workdir>
+              <user></user>
             </createContainer>
             <stopContainer>
               <timeout>10</timeout>
@@ -245,7 +294,120 @@
               <force>false</force>
             </removeContainer>
           </dockerContainerLifecycle>
-          <nodeProperties/>
+          <nodeProperties>
+            <com.github.kostyasha.yad.DockerNodeProperty>
+              <containerId>DOCKER_CONTAINER_ID</containerId>
+              <containerIdCheck>true</containerIdCheck>
+              <cloudId>JENKINS_CLOUD_ID</cloudId>
+              <cloudIdCheck>true</cloudIdCheck>
+              <dockerHost>DOCKER_HOST</dockerHost>
+              <dockerHostCheck>true</dockerHostCheck>
+            </com.github.kostyasha.yad.DockerNodeProperty>
+          </nodeProperties>
+          <configVersion>1</configVersion>
+          <maxCapacity>4</maxCapacity>
+        </com.github.kostyasha.yad.DockerSlaveTemplate>
+        <com.github.kostyasha.yad.DockerSlaveTemplate>
+          <id>23acc292-2d0d-4aa8-a45d-b324ee4e1057</id>
+          <labelString>java9</labelString>
+          <launcher class="com.github.kostyasha.yad.launcher.DockerComputerJNLPLauncher">
+            <launchTimeout>120</launchTimeout>
+            <user>jenkins</user>
+            <jvmOpts></jvmOpts>
+            <slaveOpts></slaveOpts>
+            <jenkinsUrl></jenkinsUrl>
+            <noCertificateCheck>false</noCertificateCheck>
+            <reconnect>false</reconnect>
+          </launcher>
+          <remoteFs>/home/jenkins</remoteFs>
+          <mode>EXCLUSIVE</mode>
+          <retentionStrategy class="com.github.kostyasha.yad.strategy.DockerOnceRetentionStrategy">
+            <idleMinutes>10</idleMinutes>
+            <idleMinutes defined-in="com.github.kostyasha.yad.strategy.DockerOnceRetentionStrategy">10</idleMinutes>
+          </retentionStrategy>
+          <numExecutors>1</numExecutors>
+          <dockerContainerLifecycle>
+            <image>jfactory/java9-slave:latest</image>
+            <pullImage>
+              <pullStrategy>PULL_LATEST</pullStrategy>
+              <credentialsId></credentialsId>
+            </pullImage>
+            <createContainer>
+              <command></command>
+              <hostname></hostname>
+              <dnsHosts class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </dnsHosts>
+              <volumes class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </volumes>
+              <volumesFrom class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </volumesFrom>
+              <environment class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </environment>
+              <bindPorts></bindPorts>
+              <bindAllPorts>false</bindAllPorts>
+              <memoryLimit>0</memoryLimit>
+              <privileged>false</privileged>
+              <tty>false</tty>
+              <extraHosts class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </extraHosts>
+              <devices class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </devices>
+              <cpusetCpus></cpusetCpus>
+              <cpusetMems></cpusetMems>
+              <links class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </links>
+              <shmSize>0</shmSize>
+              <restartPolicy>
+                <policyName>NO</policyName>
+                <maximumRetryCount>0</maximumRetryCount>
+              </restartPolicy>
+              <workdir></workdir>
+              <user></user>
+            </createContainer>
+            <stopContainer>
+              <timeout>10</timeout>
+            </stopContainer>
+            <removeContainer>
+              <removeVolumes>true</removeVolumes>
+              <force>false</force>
+            </removeContainer>
+          </dockerContainerLifecycle>
+          <nodeProperties>
+            <hudson.slaves.EnvironmentVariablesNodeProperty>
+              <envVars serialization="custom">
+                <unserializable-parents/>
+                <tree-map>
+                  <default>
+                    <comparator class="hudson.util.CaseInsensitiveComparator"/>
+                  </default>
+                  <int>0</int>
+                </tree-map>
+              </envVars>
+            </hudson.slaves.EnvironmentVariablesNodeProperty>
+            <com.github.kostyasha.yad.DockerNodeProperty>
+              <containerId>DOCKER_CONTAINER_ID</containerId>
+              <containerIdCheck>true</containerIdCheck>
+              <cloudId>JENKINS_CLOUD_ID</cloudId>
+              <cloudIdCheck>true</cloudIdCheck>
+              <dockerHost>DOCKER_HOST</dockerHost>
+              <dockerHostCheck>true</dockerHostCheck>
+            </com.github.kostyasha.yad.DockerNodeProperty>
+          </nodeProperties>
+          <configVersion>1</configVersion>
           <maxCapacity>4</maxCapacity>
         </com.github.kostyasha.yad.DockerSlaveTemplate>
       </templates>
@@ -270,6 +432,11 @@
   </views>
   <primaryView>all</primaryView>
   <slaveAgentPort>50000</slaveAgentPort>
+  <disabledAgentProtocols>
+    <string>CLI2-connect</string>
+    <string>JNLP2-connect</string>
+    <string>JNLP3-connect</string>
+  </disabledAgentProtocols>
   <label></label>
   <nodeProperties/>
   <globalNodeProperties/>
