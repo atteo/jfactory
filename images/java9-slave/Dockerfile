@@ -1,5 +1,5 @@
 # common-slave but with java9
-FROM openjdk:9.0.1-11-jdk
+FROM openjdk:9.0.1-11-jdk-slim
 MAINTAINER Sławek Piotrowski <sentinel@atteo.com>
 
 ENV HOME /home/jenkins
@@ -7,6 +7,10 @@ ENV LANG en_US.UTF-8
 ENV _JAVA_OPTIONS -Dfile.encoding=UTF-8
 
 RUN useradd -c "Jenkins user" -d $HOME -m jenkins
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+		curl git openssh-client \
+	&& rm -rf /var/lib/apt/lists/*
 
 WORKDIR /home/jenkins
 
