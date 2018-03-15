@@ -31,7 +31,7 @@ RUN \
     \
     echo "===> install cloud tools" && \
 	wget http://ftp.de.debian.org/debian/pool/main/o/openssl/libssl1.0.0_1.0.2l-1~bpo8+1_amd64.deb && dpkg -i libssl1.0.0_1.0.2l-1~bpo8+1_amd64.deb && rm -f libssl1.0.0_1.0.2l-1~bpo8+1_amd64.deb && \
-    apt-get install -y unzip docker-ce azure-cli awscli jq gettext-base netcat-openbsd google-cloud-sdk postgresql-client-common && \
+    apt-get install -y unzip docker-ce azure-cli awscli jq gettext-base netcat-openbsd google-cloud-sdk postgresql-client-9.6 && \
     usermod -aG docker jenkins && \
     \
     \
