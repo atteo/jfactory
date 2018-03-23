@@ -1,5 +1,5 @@
 # common-slave but with java9
-FROM openjdk:9.0.1-11-jdk-slim
+FROM openjdk:9.0.4-12-jdk-slim
 MAINTAINER Sławek Piotrowski <sentinel@atteo.com>
 
 ENV HOME /home/jenkins
