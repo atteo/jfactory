@@ -1,32 +1,35 @@
+#override structs version temporarily, because otherwise structs:1.17 is downloaded which does not exists yet
+structs:1.16
+
 # Main plugin aggregating other Pipeline plugins
-workflow-aggregator:2.5
-workflow-multibranch:2.17
-workflow-cps-global-lib:2.9
-pipeline-model-definition:1.2.7
+workflow-aggregator:2.6
+workflow-multibranch:2.20
+workflow-cps-global-lib:2.12
+pipeline-model-definition:1.3.2
 
 # Plugin for timestamps in the Jenkins logs
-timestamper:1.8.9
+timestamper:1.8.10
 
 # For fancy messages
 figlet-buildstep:0.2
 
 # Automatic folders based on branch detection
-cloudbees-folder:6.4
+cloudbees-folder:6.6
 
 # Locking support
-lockable-resources:2.2
+lockable-resources:2.3
 
 # Docker plugins
 docker-build-step:2.0
-docker-plugin:1.1.3
-yet-another-docker-plugin:0.1.0-rc47
+docker-plugin:1.1.5
+yet-another-docker-plugin:0.1.0-rc48
 
-gerrit-trigger:2.27.5
-git:3.8.0
-ssh-agent:1.15
-ssh-slaves:1.26
-token-macro:2.3
+gerrit-trigger:2.27.7
+git:3.9.1
+ssh-agent:1.17
+ssh-slaves:1.28.1
+token-macro:2.5
 credentials-binding:1.16
 ansicolor:0.5.2
-email-ext:2.62
-maven-plugin:3.1
+email-ext:2.63
+maven-plugin:3.1.2
