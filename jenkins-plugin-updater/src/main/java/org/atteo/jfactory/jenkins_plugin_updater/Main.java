@@ -30,6 +30,10 @@ public class Main {
         DocumentContext json = downloadUpdateCenterJson();
         try (Stream<String> stream = Files.lines(Paths.get(PLUGINS_VERSION_FILE))) {
             stream.forEach(line -> {
+				if (line.startsWith("#")) {
+					entries.add(line);
+					return;
+				}
                 String[] splitted = line.split(":");
 
                 if (splitted.length != 2) {
@@ -40,7 +44,7 @@ public class Main {
                 String pluginName = splitted[0];
                 String oldPluginVersion = splitted[1];
 
-                String path = "$.plugins." + pluginName + ".version";
+                String path = "$.plugins['" + pluginName + "'].version";
                 String pluginVersion = json.read(path, String.class);
 
                 entries.add(new Plugin(pluginName, pluginVersion));
