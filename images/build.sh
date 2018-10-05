@@ -13,5 +13,7 @@ proxy/build.sh $VERSION
 common-slave/build.sh $VERSION
 cloud-slave/build.sh $VERSION
 java8-slave/build.sh $VERSION
+java10-slave/build.sh $VERSION
+java11-slave/build.sh $VERSION
 javascript-slave/build.sh $VERSION
 
