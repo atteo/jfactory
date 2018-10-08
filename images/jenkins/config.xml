@@ -1,11 +1,12 @@
 <?xml version='1.1' encoding='UTF-8'?>
 <hudson>
-  <disabledAdministrativeMonitors/>
-  <version>2.108</version>
-  <installState class="jenkins.install.InstallState$5">
-    <isSetupComplete>true</isSetupComplete>
-    <name>RESTART</name>
-  </installState>
+  <disabledAdministrativeMonitors>
+    <string>jenkins.CLI</string>
+    <string>jenkins.diagnostics.SecurityIsOffMonitor</string>
+    <string>jenkins.security.csrf.CSRFAdministrativeMonitor</string>
+  </disabledAdministrativeMonitors>
+  <version>2.138.1</version>
+  <installStateName>RESTART</installStateName>
   <numExecutors>0</numExecutors>
   <mode>NORMAL</mode>
   <useSecurity>true</useSecurity>
@@ -20,7 +21,7 @@
   <viewsTabBar class="hudson.views.DefaultViewsTabBar"/>
   <myViewsTabBar class="hudson.views.DefaultMyViewsTabBar"/>
   <clouds>
-    <com.github.kostyasha.yad.DockerCloud plugin="yet-another-docker-plugin@0.1.0-rc47">
+    <com.github.kostyasha.yad.DockerCloud plugin="yet-another-docker-plugin@0.1.0-rc48">
       <name>Local</name>
       <provisionedImages/>
       <templates>
@@ -90,6 +91,10 @@
                 <c class="list"/>
                 <list reference="../c"/>
               </links>
+              <dockerLabels class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </dockerLabels>
               <shmSize>0</shmSize>
               <restartPolicy>
                 <policyName>NO</policyName>
@@ -125,7 +130,7 @@
           <launcher class="com.github.kostyasha.yad.launcher.DockerComputerJNLPLauncher">
             <launchTimeout>120</launchTimeout>
             <user>jenkins</user>
-            <jvmOpts></jvmOpts>
+            <jvmOpts>-Dsun.jnu.encoding=UTF-8 -Dfile.encoding=UTF-8</jvmOpts>
             <slaveOpts></slaveOpts>
             <jenkinsUrl></jenkinsUrl>
             <noCertificateCheck>false</noCertificateCheck>
@@ -185,6 +190,10 @@
                 <c class="list"/>
                 <list reference="../c"/>
               </links>
+              <dockerLabels class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </dockerLabels>
               <shmSize>0</shmSize>
               <restartPolicy>
                 <policyName>NO</policyName>
@@ -255,7 +264,9 @@
                 <list reference="../c"/>
               </volumesFrom>
               <environment class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
-                <c class="list"/>
+                <c class="list">
+                  <string>_JAVA_OPTIONS=-Dsun.jnu.encoding=UTF-8 -Dfile.encoding=UTF-8</string>
+                </c>
                 <list reference="../c"/>
               </environment>
               <bindPorts></bindPorts>
@@ -278,6 +289,10 @@
                 <c class="list"/>
                 <list reference="../c"/>
               </links>
+              <dockerLabels class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </dockerLabels>
               <shmSize>0</shmSize>
               <restartPolicy>
                 <policyName>NO</policyName>
@@ -340,7 +355,9 @@
                 <list reference="../c"/>
               </dnsHosts>
               <volumes class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
-                <c class="list"/>
+                <c class="list">
+                  <string>slave-m2-repository:/home/jenkins/.m2/repository</string>
+                </c>
                 <list reference="../c"/>
               </volumes>
               <volumesFrom class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
@@ -360,6 +377,7 @@
                 <c class="list"/>
                 <list reference="../c"/>
               </extraHosts>
+              <networkMode>jfactory_default</networkMode>
               <devices class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
                 <c class="list"/>
                 <list reference="../c"/>
@@ -370,6 +388,10 @@
                 <c class="list"/>
                 <list reference="../c"/>
               </links>
+              <dockerLabels class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </dockerLabels>
               <shmSize>0</shmSize>
               <restartPolicy>
                 <policyName>NO</policyName>
@@ -407,6 +429,192 @@
               <dockerHostCheck>true</dockerHostCheck>
             </com.github.kostyasha.yad.DockerNodeProperty>
           </nodeProperties>
+          <configVersion>1</configVersion>
+          <maxCapacity>4</maxCapacity>
+        </com.github.kostyasha.yad.DockerSlaveTemplate>
+        <com.github.kostyasha.yad.DockerSlaveTemplate>
+          <id>84310d2a-b65f-4074-a9fb-775427be5518</id>
+          <labelString>java11</labelString>
+          <launcher class="com.github.kostyasha.yad.launcher.DockerComputerJNLPLauncher">
+            <launchTimeout>120</launchTimeout>
+            <user>jenkins</user>
+            <jvmOpts></jvmOpts>
+            <slaveOpts></slaveOpts>
+            <jenkinsUrl></jenkinsUrl>
+            <noCertificateCheck>false</noCertificateCheck>
+            <reconnect>false</reconnect>
+          </launcher>
+          <remoteFs>/home/jenkins</remoteFs>
+          <mode>EXCLUSIVE</mode>
+          <retentionStrategy class="com.github.kostyasha.yad.strategy.DockerOnceRetentionStrategy">
+            <idleMinutes>10</idleMinutes>
+            <idleMinutes defined-in="com.github.kostyasha.yad.strategy.DockerOnceRetentionStrategy">10</idleMinutes>
+          </retentionStrategy>
+          <numExecutors>1</numExecutors>
+          <dockerContainerLifecycle>
+            <image>jfactory/java11-slave:latest</image>
+            <pullImage>
+              <pullStrategy>PULL_LATEST</pullStrategy>
+              <credentialsId></credentialsId>
+            </pullImage>
+            <createContainer>
+              <command></command>
+              <hostname></hostname>
+              <dnsHosts class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </dnsHosts>
+              <volumes class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list">
+                  <string>slave-m2-repository:/home/jenkins/.m2/repository</string>
+                </c>
+                <list reference="../c"/>
+              </volumes>
+              <volumesFrom class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </volumesFrom>
+              <environment class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </environment>
+              <bindPorts></bindPorts>
+              <bindAllPorts>false</bindAllPorts>
+              <memoryLimit>0</memoryLimit>
+              <privileged>false</privileged>
+              <tty>false</tty>
+              <extraHosts class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </extraHosts>
+              <networkMode>jfactory_default</networkMode>
+              <devices class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </devices>
+              <cpusetCpus></cpusetCpus>
+              <cpusetMems></cpusetMems>
+              <links class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </links>
+              <dockerLabels class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </dockerLabels>
+              <shmSize>0</shmSize>
+              <restartPolicy>
+                <policyName>NO</policyName>
+                <maximumRetryCount>0</maximumRetryCount>
+              </restartPolicy>
+              <workdir></workdir>
+              <user></user>
+            </createContainer>
+            <stopContainer>
+              <timeout>10</timeout>
+            </stopContainer>
+            <removeContainer>
+              <removeVolumes>true</removeVolumes>
+              <force>false</force>
+            </removeContainer>
+          </dockerContainerLifecycle>
+          <nodeProperties>
+            <com.github.kostyasha.yad.DockerNodeProperty>
+              <containerId>DOCKER_CONTAINER_ID</containerId>
+              <containerIdCheck>true</containerIdCheck>
+              <cloudId>JENKINS_CLOUD_ID</cloudId>
+              <cloudIdCheck>true</cloudIdCheck>
+              <dockerHost>DOCKER_HOST</dockerHost>
+              <dockerHostCheck>true</dockerHostCheck>
+            </com.github.kostyasha.yad.DockerNodeProperty>
+          </nodeProperties>
+          <configVersion>1</configVersion>
+          <maxCapacity>4</maxCapacity>
+        </com.github.kostyasha.yad.DockerSlaveTemplate>
+        <com.github.kostyasha.yad.DockerSlaveTemplate>
+          <id>d6afff03-6b71-4735-abf4-087764f73f9b</id>
+          <labelString>javascript-chromium</labelString>
+          <launcher class="com.github.kostyasha.yad.launcher.DockerComputerJNLPLauncher">
+            <launchTimeout>120</launchTimeout>
+            <user>jenkins</user>
+            <jvmOpts></jvmOpts>
+            <slaveOpts></slaveOpts>
+            <jenkinsUrl></jenkinsUrl>
+            <noCertificateCheck>false</noCertificateCheck>
+            <reconnect>false</reconnect>
+          </launcher>
+          <remoteFs>/home/jenkins</remoteFs>
+          <mode>EXCLUSIVE</mode>
+          <retentionStrategy class="com.github.kostyasha.yad.strategy.DockerOnceRetentionStrategy">
+            <idleMinutes>10</idleMinutes>
+            <idleMinutes defined-in="com.github.kostyasha.yad.strategy.DockerOnceRetentionStrategy">10</idleMinutes>
+          </retentionStrategy>
+          <numExecutors>1</numExecutors>
+          <dockerContainerLifecycle>
+            <image>jfactory/javascript-chromium-slave:latest</image>
+            <pullImage>
+              <pullStrategy>PULL_LATEST</pullStrategy>
+              <credentialsId></credentialsId>
+            </pullImage>
+            <createContainer>
+              <command></command>
+              <hostname></hostname>
+              <dnsHosts class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </dnsHosts>
+              <volumes class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </volumes>
+              <volumesFrom class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </volumesFrom>
+              <environment class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </environment>
+              <bindPorts></bindPorts>
+              <bindAllPorts>false</bindAllPorts>
+              <memoryLimit>0</memoryLimit>
+              <privileged>false</privileged>
+              <tty>false</tty>
+              <extraHosts class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </extraHosts>
+              <networkMode>jfactory_default</networkMode>
+              <devices class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </devices>
+              <cpusetCpus></cpusetCpus>
+              <cpusetMems></cpusetMems>
+              <links class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </links>
+              <dockerLabels class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+                <c class="list"/>
+                <list reference="../c"/>
+              </dockerLabels>
+              <shmSize>0</shmSize>
+              <restartPolicy>
+                <policyName>NO</policyName>
+                <maximumRetryCount>0</maximumRetryCount>
+              </restartPolicy>
+              <workdir></workdir>
+              <user></user>
+            </createContainer>
+            <stopContainer>
+              <timeout>10</timeout>
+            </stopContainer>
+            <removeContainer>
+              <removeVolumes>true</removeVolumes>
+              <force>false</force>
+            </removeContainer>
+          </dockerContainerLifecycle>
           <configVersion>1</configVersion>
           <maxCapacity>4</maxCapacity>
         </com.github.kostyasha.yad.DockerSlaveTemplate>

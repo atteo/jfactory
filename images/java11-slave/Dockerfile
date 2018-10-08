@@ -22,6 +22,10 @@ ENV MAVEN_HOME /usr/share/maven
 
 USER root
 
+RUN apt-get update && apt-get -y install \
+	git \
+	&& rm -rf /var/lib/apt/lists/*
+
 # Maven
 RUN mkdir -p $MAVEN_HOME \
   && curl -fsSL https://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz \
