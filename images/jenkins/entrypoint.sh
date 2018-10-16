@@ -14,4 +14,4 @@ fi
 
 sed -i -re "s,MAIN_URL,${MAIN_URL},;s,JENKINS_SMTP_FROM,${JENKINS_SMTP_FROM}," /usr/share/jenkins/ref/jenkins.model.JenkinsLocationConfiguration.xml.override
 
-exec /usr/local/bin/jenkins.sh "$@"
+exec /sbin/tini -- /usr/local/bin/jenkins.sh "$@"
