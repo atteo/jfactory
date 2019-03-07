@@ -12,7 +12,7 @@
 
     <properties>
         <Gerrit-ApiType>plugin</Gerrit-ApiType>
-        <Gerrit-ApiVersion>2.14</Gerrit-ApiVersion>
+        <Gerrit-ApiVersion>2.16</Gerrit-ApiVersion>
     </properties>
 
     <build>

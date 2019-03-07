@@ -1,8 +1,8 @@
 FROM java:openjdk-8-jre
 MAINTAINER Sławek Piotrowski <sentinel@atteo.com>
 
-ENV GERRIT_VERSION 2.14.6
-ENV PLUGIN_VERSION 2.14
+ENV GERRIT_VERSION 2.16
+ENV PLUGIN_VERSION 2.16
 ENV GERRIT_HOME "/home/gerrit"
 ENV GERRIT_USER "gerrit"
 
@@ -25,7 +25,7 @@ RUN mkdir -p plugins \
 COPY initial_repositories ./initial_repositories
 COPY project.config ./
 COPY gerrit.sh ./
-COPY batchuser.jar plugins/
+#COPY batchuser.jar plugins/
 RUN chown -R $GERRIT_USER.$GERRIT_USER plugins initial_repositories project.config gerrit.sh gerrit.war review_site
 
 USER $GERRIT_USER

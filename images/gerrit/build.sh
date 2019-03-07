@@ -6,7 +6,7 @@ VERSION="$1"
 # go to the script directory
 cd "$( dirname "${BASH_SOURCE[0]}" )"
 
-cp ../../batchuser-gerrit-plugin/target/batchuser-gerrit-plugin-1.0.0-SNAPSHOT.jar docker/batchuser.jar
+#cp ../../batchuser-gerrit-plugin/target/batchuser-gerrit-plugin-1.0.0-SNAPSHOT.jar docker/batchuser.jar
 
 rm -rf docker/initial_repositories
 cp -r initial_repositories docker/
@@ -44,6 +44,6 @@ cd ../..
 
 docker build -t jfactory/gerrit:$VERSION --build-arg=http_proxy --build-arg=https_proxy --build-arg=no_proxy  docker/
 
-rm docker/batchuser.jar
+#rm docker/batchuser.jar
 rm -rf docker/initial_repositories
 
