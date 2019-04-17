@@ -17,7 +17,7 @@ USER jenkins
 
 
 # versions
-ENV MAVEN_VERSION 3.5.4
+ENV MAVEN_VERSION 3.6.0
 ENV MAVEN_HOME /usr/share/maven
 
 USER root

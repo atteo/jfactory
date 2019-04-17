@@ -2,7 +2,7 @@ FROM jfactory/common-slave:latest
 MAINTAINER Sławek Piotrowski <sentinel@atteo.com>
 
 # versions
-ENV MAVEN_VERSION 3.5.4
+ENV MAVEN_VERSION 3.6.0
 ENV MAVEN_HOME /usr/share/maven
 
 USER root
