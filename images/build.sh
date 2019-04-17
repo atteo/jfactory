@@ -15,5 +15,6 @@ cloud-slave/build.sh $VERSION
 java8-slave/build.sh $VERSION
 java10-slave/build.sh $VERSION
 java11-slave/build.sh $VERSION
+java12-slave/build.sh $VERSION
 javascript-slave/build.sh $VERSION
 
