@@ -9,6 +9,7 @@ docker push jfactory/java8-slave:$VERSION
 docker push jfactory/java9-slave:$VERSION
 docker push jfactory/java10-slave:$VERSION
 docker push jfactory/java11-slave:$VERSION
+docker push jfactory/java12-slave:$VERSION
 docker push jfactory/javascript-slave:$VERSION
 docker push jfactory/javascript-chromium-slave:$VERSION
 docker push jfactory/cloud-slave:$VERSION
