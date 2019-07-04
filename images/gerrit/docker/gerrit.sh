@@ -21,6 +21,8 @@ configure_ldap() {
 	gerrit_config auth.type "LDAP"
 	gerrit_config ldap.server "${LDAP_URL}"
 	gerrit_config ldap.sslVerify "false"
+	gerrit_config ldap.username "${LDAP_USERNAME}"
+	gerrit_config ldap.password "${LDAP_PASSWORD}"
 	gerrit_config ldap.accountBase "${LDAP_ACCOUNT_BASE}"
 	#gerrit_config ldap.accountScope "one"
 	gerrit_config ldap.groupBase "${LDAP_GROUP_BASE}"
