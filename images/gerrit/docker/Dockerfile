@@ -1,8 +1,8 @@
-FROM java:openjdk-8-jre
+FROM openjdk:8u212-b04-jdk-stretch
 MAINTAINER Sławek Piotrowski <sentinel@atteo.com>
 
-ENV GERRIT_VERSION 2.16
-ENV PLUGIN_VERSION 2.16
+ENV GERRIT_VERSION 3.0.1
+ENV PLUGIN_VERSION 3.0
 ENV GERRIT_HOME "/home/gerrit"
 ENV GERRIT_USER "gerrit"
 
@@ -18,8 +18,7 @@ RUN mkdir review_site
 
 # Install plugins
 RUN mkdir -p plugins \
-	&& curl -f -L https://gerrit-ci.gerritforge.com/job/plugin-delete-project-bazel-stable-${PLUGIN_VERSION}/lastSuccessfulBuild/artifact/bazel-genfiles/plugins/delete-project/delete-project.jar -o plugins/delete-project.jar \
-	&& curl -f -L https://gerrit-ci.gerritforge.com/job/plugin-reviewers-bazel-stable-${PLUGIN_VERSION}/lastSuccessfulBuild/artifact/bazel-genfiles/plugins/reviewers/reviewers.jar -o plugins/reviewers.jar \
+	&& curl -f -L https://gerrit-ci.gerritforge.com/job/plugin-reviewers-bazel-stable-${PLUGIN_VERSION}/lastSuccessfulBuild/artifact/bazel-bin/plugins/reviewers/reviewers.jar -o plugins/reviewers.jar \
 	&& unzip -j gerrit.war WEB-INF/plugins/download-commands.jar -d plugins
 
 COPY initial_repositories ./initial_repositories
