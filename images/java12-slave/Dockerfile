@@ -1,5 +1,5 @@
 # common-slave but with java12
-FROM adoptopenjdk/openjdk12:x86_64-ubuntu-jdk-12.33
+FROM adoptopenjdk/openjdk12:x86_64-ubuntu-jdk-12.0.2_10
 MAINTAINER Sławek Piotrowski <sentinel@atteo.com>
 
 ENV HOME /home/jenkins

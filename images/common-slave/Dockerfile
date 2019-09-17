@@ -1,4 +1,4 @@
-FROM openjdk:8u171-jdk-stretch
+FROM openjdk:8u222-jdk-stretch
 MAINTAINER Sławek Piotrowski <sentinel@atteo.com>
 
 ENV HOME /home/jenkins
