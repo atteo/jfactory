@@ -5,8 +5,8 @@ MAINTAINER Sławek Piotrowski <sentinel@atteo.com>
 # Latest stable: curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt
 ENV TERRAFORM_VERSION=0.11.7 \
     TERRAFORM_HOME=/usr/share/terraform \
-    DOCKER_COMPOSE_VERSION=1.23.2 \
-	KUBERNETES_VERSION=v1.13.0
+    DOCKER_COMPOSE_VERSION=1.24.1 \
+	KUBERNETES_VERSION=v1.16.0
 
 USER root
 
