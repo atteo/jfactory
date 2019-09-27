@@ -29,13 +29,14 @@ RUN \
     \
     \
     echo "===> install cloud tools" && \
-    apt-get install -y unzip docker-ce azure-cli awscli jq gettext-base netcat-openbsd google-cloud-sdk postgresql-client-9.6 && \
-    usermod -aG docker jenkins && \
+    apt-get install -y unzip docker-ce-cli azure-cli awscli jq gettext-base netcat-openbsd google-cloud-sdk postgresql-client-9.6 && \
     \
     \
     echo "===> clean" && \
     apt-get -y clean  && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN echo "docker:x:999:jenkins" >> /etc/group
 
 # terraform
 RUN mkdir -p $TERRAFORM_HOME \
