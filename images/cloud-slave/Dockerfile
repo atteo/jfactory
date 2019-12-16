@@ -53,5 +53,6 @@ RUN curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE
 RUN curl -L https://storage.googleapis.com/kubernetes-release/release/${KUBERNETES_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl && \
     chmod +x /usr/local/bin/kubectl
 
+EXPOSE 5000
 USER jenkins
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 trap "exit 1" ERR
 
-VERSION="$1"
+VERSION="${1:-latest}"
 
 # go to the script directory
 cd "$( dirname "${BASH_SOURCE[0]}" )"
