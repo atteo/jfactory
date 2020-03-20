@@ -23,7 +23,7 @@ ENV MAVEN_HOME /usr/share/maven
 USER root
 
 RUN apt-get update && apt-get -y install \
-	git \
+	git zip xmlstarlet \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Maven
