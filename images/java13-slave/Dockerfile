@@ -22,9 +22,11 @@ ENV MAVEN_HOME /usr/share/maven
 
 USER root
 
-RUN apt-get update && apt-get -y install \
-	git zip xmlstarlet \
-	&& rm -rf /var/lib/apt/lists/*
+RUN add-apt-repository -y ppa:libreoffice/ppa \
+    && apt update \
+    && apt-get install -y libreoffice
+    && apt-get -y install git zip xmlstarlet \
+    && rm -rf /var/lib/apt/lists/*
 
 # Maven
 RUN mkdir -p $MAVEN_HOME \
