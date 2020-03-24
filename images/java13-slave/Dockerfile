@@ -24,8 +24,7 @@ USER root
 
 RUN add-apt-repository -y ppa:libreoffice/ppa \
     && apt update \
-    && apt-get install -y libreoffice
-    && apt-get -y install git zip xmlstarlet \
+    && apt-get install -y libreoffice git zip xmlstarlet \
     && rm -rf /var/lib/apt/lists/*
 
 # Maven
