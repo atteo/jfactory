@@ -6,7 +6,8 @@ MAINTAINER Sławek Piotrowski <sentinel@atteo.com>
 ENV TERRAFORM_VERSION=0.11.7 \
     TERRAFORM_HOME=/usr/share/terraform \
     DOCKER_COMPOSE_VERSION=1.24.1 \
-	KUBERNETES_VERSION=v1.16.0
+	KUBERNETES_VERSION=v1.19.2 \
+	ISTIO_VERSION=1.7.2
 
 USER root
 
@@ -53,6 +54,16 @@ RUN curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE
 RUN curl -L https://storage.googleapis.com/kubernetes-release/release/${KUBERNETES_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl && \
     chmod +x /usr/local/bin/kubectl
 
-EXPOSE 5000
+# istioctl
+RUN cd /opt &&\
+	curl -L https://istio.io/downloadIstio | ISTIO_VERSION="$ISTIO_VERSION" TARGET_ARCH=x86_64 sh - && \
+	chmod -R 755 istio-"$ISTIO_VERSION" && \
+	chmod -R -x+X istio-"$ISTIO_VERSION" && \
+	chmod 755 istio-"$ISTIO_VERSION"/bin/* && \
+	ln -s istio-"$ISTIO_VERSION" istio && \
+	ln -s /opt/istio/bin/istioctl /usr/local/bin/istioctl
+
+
+EXPOSE 5000 5001 5002
 USER jenkins
 
