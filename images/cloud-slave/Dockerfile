@@ -7,11 +7,11 @@ ENV TERRAFORM_VERSION=0.11.7 \
     TERRAFORM_HOME=/usr/share/terraform \
     DOCKER_COMPOSE_VERSION=1.24.1 \
 	KUBERNETES_VERSION=v1.19.2 \
-	ISTIO_VERSION=1.7.2
+	ISTIO_VERSION=1.7.3
 
 USER root
 
-# azure, aws, google cloud and docker
+# azure, aws, google cloud, docker, helm
 RUN \
 	apt-get update && \
 	apt-get install -y gnupg2 apt-transport-https ca-certificates software-properties-common xmlstarlet python3-yaml && \
@@ -26,11 +26,13 @@ RUN \
     && \
 	echo "deb http://packages.cloud.google.com/apt cloud-sdk-$(lsb_release -c -s) main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
 	curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
+	echo "deb https://baltocdn.com/helm/stable/debian/ all main" | tee /etc/apt/sources.list.d/helm-stable-debian.list && \
+	curl https://baltocdn.com/helm/signing.asc | apt-key add - && \
     apt-get -y update && \
     \
     \
     echo "===> install cloud tools" && \
-    apt-get install -y unzip docker-ce-cli azure-cli awscli jq gettext-base netcat-openbsd google-cloud-sdk postgresql-client-9.6 && \
+    apt-get install -y unzip docker-ce-cli azure-cli awscli jq gettext-base netcat-openbsd google-cloud-sdk postgresql-client-9.6 helm && \
     \
     \
     echo "===> clean" && \
@@ -62,7 +64,6 @@ RUN cd /opt &&\
 	chmod 755 istio-"$ISTIO_VERSION"/bin/* && \
 	ln -s istio-"$ISTIO_VERSION" istio && \
 	ln -s /opt/istio/bin/istioctl /usr/local/bin/istioctl
-
 
 EXPOSE 5000 5001 5002
 USER jenkins
