@@ -1,8 +1,8 @@
 FROM openjdk:8u212-b04-jdk-stretch
 MAINTAINER Sławek Piotrowski <sentinel@atteo.com>
 
-ENV GERRIT_VERSION 3.1.2
-ENV PLUGIN_VERSION 3.1
+ENV GERRIT_VERSION 3.2.3
+ENV PLUGIN_VERSION 3.2
 ENV GERRIT_HOME "/home/gerrit"
 ENV GERRIT_USER "gerrit"
 

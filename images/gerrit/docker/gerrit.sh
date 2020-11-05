@@ -96,10 +96,14 @@ configure_gitweb() {
 	gerrit_config gitweb.type "${GITWEB_TYPE}"
 }
 
+configure_cache() {
+	gerrit_config cache.web_sessions.maxAge "30d"
+}
+
 echo "Updating..."
 java -jar gerrit.war init -d review_site --batch --no-auto-start
 
-mv plugins/* review_site/plugins/
+#mv plugins/* review_site/plugins/
 cp -r initial_repositories/* review_site/git/
 
 cd review_site
@@ -115,6 +119,7 @@ configure_suggest
 configure_batchuser
 configure_ssh
 configure_gitweb
+configure_cache
 
 echo "Reindexing..."
 java -jar bin/gerrit.war 'reindex'
