@@ -1,5 +1,5 @@
 # common-slave but with java9
-FROM adoptopenjdk/openjdk11:x86_64-ubuntu-jdk-11.28
+FROM adoptopenjdk/openjdk11:x86_64-ubuntu-jdk-11.0.7_10
 MAINTAINER Sławek Piotrowski <sentinel@atteo.com>
 
 ENV HOME /home/jenkins
