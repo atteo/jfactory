@@ -3,11 +3,11 @@ MAINTAINER Sławek Piotrowski <sentinel@atteo.com>
 
 # versions
 # Latest stable: curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt
-ENV TERRAFORM_VERSION=0.11.7 \
+ENV TERRAFORM_VERSION=0.14.9 \
     TERRAFORM_HOME=/usr/share/terraform \
-    DOCKER_COMPOSE_VERSION=1.24.1 \
-	KUBERNETES_VERSION=v1.19.2 \
-	ISTIO_VERSION=1.7.3
+    DOCKER_COMPOSE_VERSION=1.28.6 \
+	KUBERNETES_VERSION=v1.19.3 \
+	ISTIO_VERSION=1.9.1
 
 USER root
 
@@ -64,6 +64,19 @@ RUN cd /opt &&\
 	chmod 755 istio-"$ISTIO_VERSION"/bin/* && \
 	ln -s istio-"$ISTIO_VERSION" istio && \
 	ln -s /opt/istio/bin/istioctl /usr/local/bin/istioctl
+
+# Trivy
+RUN wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | apt-key add - \
+	&& echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | tee -a /etc/apt/sources.list.d/trivy.list \
+	&& apt-get update \
+	&& apt-get -y install trivy
+
+RUN  \
+	apt-get update && \
+	apt-get install -y socat && \
+    echo "===> clean" && \
+    apt-get -y clean  && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 EXPOSE 5000 5001 5002
 USER jenkins
