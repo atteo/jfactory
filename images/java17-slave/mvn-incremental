@@ -1,0 +1,46 @@
+#!/bin/bash
+
+echo "----------------------------------------"
+echo "      jfactory incremental build"
+echo "----------------------------------------"
+
+COMPLETE_BUILD="false"
+while [[ -n "$1" ]]; do
+    case "$1" in
+        --complete-build)
+            COMPLETE_BUILD="true"
+            shift
+            ;;
+    esac
+    shift
+done
+git show --pretty="format:" --name-only HEAD --relative | sed -re'/^$/d' | while read a; do dirname "$a"; done | sort -u > file.list
+
+if [[ -x "/usr/share/maven/bin/mvn" ]]; then
+    MVN="/usr/share/maven/bin/mvn"
+else
+    MVN="mvn"
+fi
+
+MVN="$MVN $MAVEN_OPTIONS"
+
+root_dir="$(pwd)/"
+
+if [[ $COMPLETE_BUILD == "true" ]]; then
+    echo "Compiling all projects"
+    exec ${MVN} ${MVN_COMPILE_GOALS}
+else
+    OLD_IFS=$IFS
+    IFS=$'\n'
+    MODULES_TO_BUILD=""
+    for MODULE in $(find . -name "pom.xml" | grep -v "target/" | sed -re's,^\./,,' | while read a; do dirname "$a"; done | sort -u); do
+        if grep -F "$MODULE" "${root_dir}/file.list"; then
+            MODULES_TO_BUILD="${MODULES_TO_BUILD}${MODULES_TO_BUILD:+,}${MODULE}"
+        fi
+    done
+    IFS=$OLD_IFS
+
+    echo "Compiling incrementally"
+    echo "${MVN} ${MVN_COMPILE_GOALS} -amd -pl $MODULES_TO_BUILD"
+    exec ${MVN} ${MVN_COMPILE_GOALS} -amd -pl $MODULES_TO_BUILD
+fi
